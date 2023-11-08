@@ -1,5 +1,4 @@
 #include "main.h"
-#include "extern.h"
 #include "lemlib/api.hpp"
 
 
@@ -14,6 +13,25 @@
  */
 void initialize() {
 	chassis.calibrate();
+    chassis.setPose(0,0,0);
+    chassis.setPose(1,2.5, 90);
+	pros::Task screenTask([=]() {
+        while (true) {
+            pros::lcd::print(0, "X: %f", chassis.getPose().x);
+            pros::lcd::print(1, "Y: %f", chassis.getPose().y);
+            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta);
+            pros::delay(50);
+        }
+    });
+    
+    pros::Task cataTask([=](){
+        while(true){
+            if(!limitSwitch.get_value()){
+                cata.move(-127);
+            }
+            pros::delay(50);
+        }
+    });
 }
 
 /**
@@ -46,6 +64,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	chassis.moveTo(5, 5, 200, 600, true);
 	
 }
 
