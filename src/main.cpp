@@ -14,7 +14,7 @@
 void initialize() {
 	chassis.calibrate();
     chassis.setPose(0,0,0);
-    chassis.setPose(1,2.5, 90);
+    chassis.setPose(-35, 60, 90);
 	pros::Task screenTask([=]() {
         while (true) {
             pros::lcd::print(0, "X: %f", chassis.getPose().x);
