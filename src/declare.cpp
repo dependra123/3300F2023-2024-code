@@ -5,8 +5,6 @@ pros::Motor lm(2, pros::E_MOTOR_GEARSET_18, false); // port 2, green gearbox, no
 pros::Motor lb(3, pros::E_MOTOR_GEARSET_18, false); // port 2, green gearbox, not reversed
 pros::Motor rf(4, pros::E_MOTOR_GEARSET_36, true); // port 3, red gearbox, reversed
 pros::Motor rm(5, pros::E_MOTOR_GEARSET_36, true); // port 3, red gearbox, reversed
-
-
 pros::Motor rb(6, pros::E_MOTOR_GEARSET_36, true); // port 4, red gearbox, reversed
 
 pros::MotorGroup rightMotor({rf,rm, rb});
