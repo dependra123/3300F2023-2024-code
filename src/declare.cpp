@@ -1,11 +1,11 @@
 #include "main.h"
 
-pros::Motor lf(1, pros::E_MOTOR_GEARSET_06, false); // port 1, blue gearbox, not reversed
-pros::Motor lm(2, pros::E_MOTOR_GEARSET_18, false); // port 2, green gearbox, not reversed
-pros::Motor lb(3, pros::E_MOTOR_GEARSET_18, false); // port 2, green gearbox, not reversed
-pros::Motor rf(4, pros::E_MOTOR_GEARSET_36, true); // port 3, red gearbox, reversed
-pros::Motor rm(5, pros::E_MOTOR_GEARSET_36, true); // port 3, red gearbox, reversed
-pros::Motor rb(6, pros::E_MOTOR_GEARSET_36, true); // port 4, red gearbox, reversed
+pros::Motor lf(13, pros::E_MOTOR_GEARSET_06, false); // port 1, blue gearbox, not reversed
+pros::Motor lm(14, pros::E_MOTOR_GEARSET_18, false); // port 2, green gearbox, not reversed
+pros::Motor lb(15, pros::E_MOTOR_GEARSET_18, false); // port 2, green gearbox, not reversed
+pros::Motor rf(18, pros::E_MOTOR_GEARSET_36, true); // port 3, red gearbox, reversed
+pros::Motor rm(17, pros::E_MOTOR_GEARSET_36, true); // port 3, red gearbox, reversed
+pros::Motor rb(16, pros::E_MOTOR_GEARSET_36, true); // port 4, red gearbox, reversed
 
 pros::MotorGroup rightMotor({rf,rm, rb});
 pros::MotorGroup leftMotor({lf,lm, lb});
