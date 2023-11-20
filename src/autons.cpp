@@ -3,7 +3,72 @@
 void intake(bool reverse=false){
     intakeMotor.move(reverse ? -127: 127);
 }
+void driveTask(){
+    chassis.moveTo(0, 10, 3000);
+}
+void autoTuner(){
+    //make a task that will tune the pid values
+    //Start at default vaules check for ocillations the increase kD until ocillations stop
+    //then increase kP until ocillations start again
+    //repeat until oscillations can not be stopped then set kD and kP to the last value that stopped oscillations
+    
+    int count = 0; 
+    bool tuning = true;
+    bool tuned = false;
+    bool driveSetteled = true;
+    bool direction = true;
+    float nextKp = 1;
+    float nextKd = 1;
+    lemlib::Pose lastPose = chassis.getPose();
+    double lastTime = pros::millis();
+    while(tuning){
+        //move forward
+        if(driveSetteled){
+            prevKp = nextKp;
+            lateralController.kD = nextKd;
+            lateralController.kP = tuned ? nextKp : nextKp+=.5;
+            chassis.moveTo(0, (count % 2 == 0)? 10:0, 3000, true);
+            
+            driveSetteled = false;
+        }
+        if(pros::millis() - lastTime > 100){
+            lastTime = pros::millis();
+            lemlib::Pose pose = chassis.getPose();
+            if(pose.x == lastPose.x && pose.y == lastPose.y){
+                driveSetteled = true;
+            }
+            lastPose = pose;
+        }
+        if(pros::millis() - lastTime > 200 && chassis.getPose().x - lastPose.x < 0.1 && chassis.getPose().y - lastPose.y < 0.1){
+            if(direction){
+                direction = false;
+            }
+            else{
+                tuned = true;
+                prevKd = nextKd;
+                nextKd += .5;
+            }
+        }
 
+        
+        
+        //check for ocillations
+
+        count++;
+        
+        
+        
+
+    }
+    
+
+}
+int test(){
+    chassis.moveTo(0, 10, 3000);
+    chassis.moveTo(0, 0, 3000);
+    return 0;
+    
+}
 
 int closeSideQual(){
     intake();
@@ -41,10 +106,12 @@ int closeSideQual(){
     chassis.turnTo(-32, 0, 1000);
     intake();
     chassis.moveTo(-32,0,2500);
+    pros::delay(500);
+    intakeMotor.move(0);
 
 
 
-
+    return 0;
 
 
 

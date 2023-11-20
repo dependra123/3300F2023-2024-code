@@ -3,7 +3,22 @@
 
 
 
+ void screen() {
+    // loop forever
+    while (true) {
+        lemlib::Pose pose = chassis.getPose(); // get the current position of the robot
+        pros::lcd::print(0, "x: %f", pose.x); // print the x position
+        pros::lcd::print(1, "y: %f", pose.y); // print the y position
+        pros::lcd::print(2, "heading: %f", pose.theta); // print the heading
+        pros::lcd::print(3, " Vert Kp: %f", lateralController.kP); // print the heading
+        pros::lcd::print(4, " Vert Kd: %f", lateralController.kD); // print the heading
+        pros::lcd::print(5, " Horiz Kp: %f", angularController.kP); // print the heading
+        pros::lcd::print(6, " Horiz Kd: %f", angularController.kD); // print the heading
+        pros::lcd::print(7, " prev Kd: %f", angularController.kD); // print the heading
 
+        pros::delay(10);
+    }
+}
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -12,26 +27,10 @@
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	chassis.calibrate();
-    chassis.setPose(0,0,0);
-    chassis.setPose(-35, 60, 90);
-	pros::Task screenTask([=]() {
-        while (true) {
-            pros::lcd::print(0, "X: %f", chassis.getPose().x);
-            pros::lcd::print(1, "Y: %f", chassis.getPose().y);
-            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta);
-            pros::delay(50);
-        }
-    });
-    
-    pros::Task cataTask([=](){
-        while(true){
-            if(!limitSwitch.get_value()){
-                cata.move(-127);
-            }
-            pros::delay(50);
-        }
-    });
+	pros::lcd::initialize(); // initialize brain screen
+    chassis.calibrate(); // calibrate the chassis
+    chassis.setPose({0, 0, 0}); // set the starting position of the robot to (0, 0, 0)
+    pros::Task screenTask(screen); // create a task to print the position to the screen
 }
 
 /**
@@ -64,7 +63,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	chassis.moveTo(5, 5, 200, 600, true);
+	test();
 	
 }
 
@@ -97,13 +96,17 @@ void arcade(int throttle, int turn, float curveGain) {
     drivetrain.rightMotors->move(rightPower);
 }
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	
-
-	while (true) {
-		arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 15);
-		
-
-		pros::delay(20);
-	}
+    pros::Controller master(pros::E_CONTROLLER_MASTER);
+	while(true){
+        arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 10);
+        if(master.get_digital(DIGITAL_L1)){
+            intakeMotor.move(127);
+        }
+        else if(master.get_digital(DIGITAL_L2)){
+            intakeMotor.move(-127);
+        }
+        else{
+            intakeMotor.move(0);
+        }
+    }
 }

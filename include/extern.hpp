@@ -7,6 +7,9 @@ extern pros::Motor rf;
 extern pros::Motor rm;
 extern pros::ADIDigitalOut wing1;
 extern pros::ADIDigitalOut wing2;
+extern float prevKp;
+extern float prevKd;
+
 
 extern pros::Motor rb; // port 4, red gearbox, reversed
 
