@@ -98,7 +98,7 @@ void arcade(int throttle, int turn, float curveGain) {
 void opcontrol() {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
 	while(true){
-        arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 10);
+        arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 8);
         if(master.get_digital(DIGITAL_L1)){
             intakeMotor.move(127);
         }
