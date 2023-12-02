@@ -125,5 +125,7 @@ void opcontrol() {
         if (master.get_digital(DIGITAL_L2)){
             cata.move(127);
         }
+        else
+            cata.move(0);
     }
 }
