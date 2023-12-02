@@ -22,6 +22,7 @@
 
  void cata_function() {
     // loop forever
+    cata.set_brake_mode(MOTOR_BRAKE_HOLD);
     while (true) {
         if (limitSwitch.get_value() == 0)
             cata.move(127);
@@ -40,9 +41,10 @@
 void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate the chassis
-    chassis.setPose({90, -160, 0}); // set the starting position of the robot to (0, 0, 0)
+    chassis.setPose({35, -63, 0}); // set the starting position of the robot to (0, 0, 0)
     pros::Task screenTask(screen); // create a task to print the position to the screen
-    pros::Task cataTask(cata_function);
+    //pros::Task cataTask(cata_function);
+    intakeHold.set_value(1);
 }
 
 /**
@@ -75,8 +77,8 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	test();
-	
+    intakeHold.set_value(0);
+	offAuton();
 }
 
 /**

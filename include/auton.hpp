@@ -4,4 +4,5 @@
 void autoTuner();
 int closeSideQual();
 int test();
-int skills_auton();
+int offAuton();
+int defAuton();

@@ -15,6 +15,7 @@ pros::MotorGroup leftMotor({lf,lm, lb});
 // pros::Rotation backRot(7);
 pros::IMU imu(20);
 pros::Motor intakeMotor(10, pros::E_MOTOR_GEARSET_06, true);
+pros::ADIDigitalOut intakeHold('G');
 
 //lemlib::TrackingWheel horizontal(&backRot, 3.25, 2.5);
 

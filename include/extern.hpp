@@ -29,10 +29,12 @@ extern pros::Motor cata;
 
 
 //TODO - CHANGE TRACK WIDTH
-extern lemlib::Drivetrain_t drivetrain ;
+extern lemlib::Drivetrain_t drivetrain;
 // forward/backward PID
 extern lemlib::ChassisController_t lateralController;
  
 // turning PID
 extern lemlib::ChassisController_t angularController;
 extern lemlib::Chassis chassis;
+
+extern pros::ADIDigitalOut intakeHold;
