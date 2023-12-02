@@ -20,6 +20,17 @@
     }
 }
 
+ void cata_function() {
+    // loop forever
+    while (true) {
+        if (limitSwitch.get_value() == 0)
+            cata.move(127);
+        else
+            cata.move(0);
+        pros::delay(10);
+    }
+}
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *lib/api.hpp"
@@ -29,8 +40,9 @@
 void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate the chassis
-    chassis.setPose({0, 0, 0}); // set the starting position of the robot to (0, 0, 0)
+    chassis.setPose({90, -160, 0}); // set the starting position of the robot to (0, 0, 0)
     pros::Task screenTask(screen); // create a task to print the position to the screen
+    pros::Task cataTask(cata_function);
 }
 
 /**
@@ -107,6 +119,9 @@ void opcontrol() {
         }
         else{
             intakeMotor.move(0);
+        }
+        if (master.get_digital(DIGITAL_L2)){
+            cata.move(127);
         }
     }
 }

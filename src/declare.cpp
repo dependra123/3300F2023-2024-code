@@ -12,16 +12,16 @@ pros::Motor rb(16, pros::E_MOTOR_GEARSET_06, false); // port 4, red gearbox, rev
 pros::MotorGroup rightMotor({rf,rm, rb});
 pros::MotorGroup leftMotor({lf,lm, lb});
 
-//pros::Rotation backRot(7);
-//pros::IMU imu(8);
+// pros::Rotation backRot(7);
+pros::IMU imu(20);
 pros::Motor intakeMotor(10, pros::E_MOTOR_GEARSET_06, true);
 
 //lemlib::TrackingWheel horizontal(&backRot, 3.25, 2.5);
 
 
-lemlib::OdomSensors_t sensors {nullptr, nullptr, nullptr, nullptr, nullptr};
-pros::ADIDigitalIn  limitSwitch('A');
-pros::Motor cata(9);
+lemlib::OdomSensors_t sensors {nullptr, nullptr, nullptr, nullptr, &imu};
+pros::ADIDigitalIn  limitSwitch('H');
+pros::Motor cata(19);
 
 
 //TODO - CHANGE TRACK WIDTH
