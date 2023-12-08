@@ -147,8 +147,16 @@ int defAuton(){
     chassis.turnTo(-60, 0, 2000);
     intakeMotor.move(127);
     chassis.moveTo(-60, 0, 2000);
+    chassis.turnTo(-10, -30, 2000);
+    chassis.moveTo(-10, -30, 2000);
+    chassis.turnTo(25, -30, 2000);
+    intakeMotor.move(-127);
+    pros::delay(2000);
+    intakeMotor.move(0);
     chassis.turnTo(-10, 0, 2000);
+    intakeMotor.move(127);
     chassis.moveTo(-10, 0, 2000);
+    chassis.turnTo(30, 0, 2000);
     intakeMotor.move(-127);
     pros::delay(2000);
     intakeMotor.move(0);
