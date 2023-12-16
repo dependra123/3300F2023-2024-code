@@ -15,6 +15,9 @@ extern pros::Motor rb; // port 4, red gearbox, reversed
 
 extern pros::MotorGroup rightMotor;
 extern pros::MotorGroup leftMotor;
+extern pros::ADIDigitalOut wing1;
+extern pros::ADIDigitalOut wing2;
+
 
 extern pros::Rotation backRot;
 extern pros::IMU imu;
@@ -25,7 +28,7 @@ extern lemlib::TrackingWheel horizontal;
 
 extern lemlib::OdomSensors_t sensors ;
 extern pros::ADIDigitalIn  limitSwitch;
-extern pros::Motor cata;
+extern pros::Motor fw;
 
 
 //TODO - CHANGE TRACK WIDTH

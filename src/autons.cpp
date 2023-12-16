@@ -6,6 +6,12 @@ void intake(bool reverse=false){
 void driveTask(){
     chassis.moveTo(0, 10, 3000);
 }
+void wing(bool open){
+    wing1.set_value(open);
+    wing2.set_value(open);
+
+
+}
 void autoTuner(){
     //make a task that will tune the pid values
     //Start at default vaules check for ocillations the increase kD until ocillations stop
@@ -117,17 +123,23 @@ int test(){
 // }
 
 int offAuton(){
-    intake(true);
-    intakeMotor.move(127);
-    chassis.moveTo(35, -13, 2000);
-    chassis.turnTo(50, -13, 2000);
-    intakeMotor.move(-127);
-    pros::delay(1000);
-    intakeMotor.move(0);
-    chassis.turnTo(35, -63, 2000);
-    chassis.moveTo(35, -63, 2000);
-    chassis.turnTo(5, -63, 2000);
-    chassis.moveTo(5, -63, 2000);
+    // intake(true);
+    // intakeMotor.move(127);
+    // chassis.moveTo(35, -13, 2000);
+    // chassis.turnTo(50, -13, 2000);
+    // intakeMotor.move(-127);
+    // pros::delay(1000);
+    // intakeMotor.move(0);
+    // chassis.turnTo(35, -63, 2000);
+    // chassis.moveTo(35, -63, 2000);
+    // chassis.turnTo(5, -63, 2000);
+    // chassis.moveTo(5, -63, 2000);
+    chassis.moveTo(0, 0, 5000);
+    chassis.moveTo(0.722, 32.411, 5000);
+    chassis.moveTo(-0.481, -13.288, 5000);
+    wing(true);
+    
+
     return 0;
 }
 
@@ -162,5 +174,73 @@ int defAuton(){
     intakeMotor.move(0);
 
     
+    return 0;
+}
+int testOffAuton(){
+    intake();
+    chassis.moveTo(3, 60, 5000, 300);
+    
+    chassis.turnTo(50, -60, 5000);
+    chassis.moveTo(50, -60, 5000, 300);
+    
+    wing(true);
+    intake(true);
+    chassis.moveTo(62, -45, 5000,120);
+    wing(false);
+    
+    chassis.moveTo(62, -25, 5000,250);
+    
+
+
+    return 0;
+}
+
+int skills(){
+    fw.move(127);
+    //  PUT THE SET POS INTO INITLIZE
+    chassis.setPose(-36, -60, 90);
+
+    //Go to matchload and shoot triballs
+    chassis.moveTo(-55,-50,1500, 360);
+    chassis.turnTo(45, 0, 1500);
+    pros::delay(25000);
+
+    //push alliacne triball into net
+    chassis.turnTo(-60,-25, 1500, true);
+    chassis.moveTo(-60,-25,1500, 360);
+    chassis.moveTo(-25, -60,360);
+    
+    //go to other side
+    chassis.turnTo(36, -60, 1500, true);
+    chassis.moveTo(36, -60, 1500,300);
+
+    //push on side
+    chassis.turnTo(60,-25, 1500, true);
+    chassis.moveTo(60,-25,1500, 360);
+
+    //push from front
+    chassis.moveTo(48,-48, 1500, 360);
+    chassis.moveTo(10,10,1500,300);
+    chassis.turnTo(45,0,750,true);
+    wing(true);
+    chassis.moveTo(45,0,750);
+    wing(false);
+
+    //push from side
+    chassis.moveTo(10,35,1700, 360);
+    wing(true);
+    chassis.moveTo(40,12,750);
+    wing(false);
+
+
+
+
+
+
+
+
+
+    
+
     return 0;
 }

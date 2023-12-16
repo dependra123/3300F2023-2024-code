@@ -20,17 +20,7 @@
     }
 }
 
- void cata_function() {
-    // loop forever
-    cata.set_brake_mode(MOTOR_BRAKE_HOLD);
-    while (true) {
-        if (limitSwitch.get_value() == 0)
-            cata.move(127);
-        else
-            cata.move(0);
-        pros::delay(10);
-    }
-}
+ 
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -123,9 +113,11 @@ void opcontrol() {
             intakeMotor.move(0);
         }
         if (master.get_digital(DIGITAL_L2)){
-            cata.move(127);
+            fw.move(127);
         }
+        else if(master.get_digital(DIGITAL_R2))
+            fw.move(-127);
         else
-            cata.move(0);
+            fw.move(0);
     }
 }
