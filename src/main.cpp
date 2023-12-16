@@ -33,7 +33,7 @@
 // }
 
 /**
- * Runs initialization code. This occurs as soon as the program is started.
+ * Runs initializatioffAutonon code. This occurs as soon as the program is started.
  *lib/api.hpp"
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
@@ -41,8 +41,8 @@
 void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate the chassis
-    //chassis.setPose({35, -63, 0}); // offensive starting position
-    chassis.setPose({-35, -63, 0}); // defensive starting position
+    chassis.setPose({35, -63, 0}); // offensive starting position
+    //chassis.setPose({-35, -63, 0}); // defensive starting position
     pros::Task screenTask(screen); // create a task to print the position to the screen
     //pros::Task cataTask(cata_function);
     intakeHold.set_value(1);
@@ -78,7 +78,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	defAuton();
+	offAuton();
     intakeHold.set_value(0);
 }
 
@@ -128,12 +128,12 @@ void opcontrol() {
             intakeMotor.move(0);
         }
         if (master.get_digital(DIGITAL_L2)){
-            fly_wheel.move(127);
+            fly_wheel.move(120);
         }
         else if(master.get_digital(DIGITAL_R2))
-            fly_wheel.move(-127);
+            fly_wheel.move(-120);
         else if(master.get_digital(DIGITAL_RIGHT))
-            fly_wheel.move(96);
+            fly_wheel.move(100);
         else
             fly_wheel.move(0);
         
