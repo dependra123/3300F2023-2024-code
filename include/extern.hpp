@@ -28,7 +28,7 @@ extern lemlib::TrackingWheel horizontal;
 
 extern lemlib::OdomSensors_t sensors ;
 extern pros::ADIDigitalIn  limitSwitch;
-extern pros::Motor fw;
+extern pros::Motor fly_wheel;
 
 
 //TODO - CHANGE TRACK WIDTH

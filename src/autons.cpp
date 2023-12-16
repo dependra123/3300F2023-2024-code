@@ -8,7 +8,7 @@ void driveTask(){
 }
 void wing(bool open){
     wing1.set_value(open);
-    wing2.set_value(open);
+  //wing2.set_value(open);
 
 
 }
@@ -123,17 +123,17 @@ int test(){
 // }
 
 int offAuton(){
-    // intake(true);
-    // intakeMotor.move(127);
-    // chassis.moveTo(35, -13, 2000);
-    // chassis.turnTo(50, -13, 2000);
-    // intakeMotor.move(-127);
-    // pros::delay(1000);
-    // intakeMotor.move(0);
-    // chassis.turnTo(35, -63, 2000);
-    // chassis.moveTo(35, -63, 2000);
-    // chassis.turnTo(5, -63, 2000);
-    // chassis.moveTo(5, -63, 2000);
+    intake(true);
+    intakeMotor.move(127);
+    chassis.moveTo(35, -13, 2000);
+    chassis.turnTo(50, -13, 2000);
+    intakeMotor.move(-127);
+    pros::delay(1000);
+    intakeMotor.move(0);
+    chassis.turnTo(35, -63, 2000);
+    chassis.moveTo(35, -63, 2000);
+    chassis.turnTo(5, -63, 2000);
+    chassis.moveTo(5, -63, 2000);
     chassis.moveTo(0, 0, 5000);
     chassis.moveTo(0.722, 32.411, 5000);
     chassis.moveTo(-0.481, -13.288, 5000);
@@ -146,18 +146,32 @@ int offAuton(){
 int defAuton(){
     intake(true);
     intakeMotor.move(127);
-    chassis.turnTo(-146, -114, 2000);
-    chassis.moveTo(-146, -114, 2000);
-    chassis.turnTo(-146, -63, 2000);
+    chassis.turnTo(-58, -35, 1000);
+    chassis.moveTo(-58, -35, 1000);
+    chassis.turnTo(-58, -25, 1000);
+    intakeMotor.move(-127);
+    pros::delay(1000);
+    intakeMotor.move(0);
+    chassis.moveTo(-58, -45, 1000);
+    chassis.turnTo(-58, -59, 1000);
+    chassis.moveTo(-58, -23.5, 1000);
+    chassis.moveTo(-58, -35, 1000);
+    chassis.turnTo(-24, -35, 1000);
+    chassis.moveTo(-24, -35, 1000);
+    chassis.turnTo(-24, -1, 1000);
+    intakeMotor.move(127);
+    chassis.moveTo(-24, -7, 1000);
+    pros::delay(500);
+    intakeMotor.move(0);
+    chassis.turnTo(-10, -20, 1000);
+    chassis.moveTo(-10, -20, 1000);
+    chassis.turnTo(-15, -20, 1000);
+    chassis.moveTo(-8, -20,1000);
     intakeMotor.move(-127);
     pros::delay(2000);
     intakeMotor.move(0);
-    chassis.moveTo(-146, -63, 2000);
-    chassis.moveTo(-146, -90, 2000);
-    chassis.turnTo(-60, -90, 2000);
-    chassis.moveTo(-60, -90, 2000);
-    chassis.turnTo(-60, 0, 2000);
-    intakeMotor.move(127);
+    
+    /*
     chassis.moveTo(-60, 0, 2000);
     chassis.turnTo(-10, -30, 2000);
     chassis.moveTo(-10, -30, 2000);
@@ -172,6 +186,7 @@ int defAuton(){
     intakeMotor.move(-127);
     pros::delay(2000);
     intakeMotor.move(0);
+    */
 
     
     return 0;
@@ -196,7 +211,7 @@ int testOffAuton(){
 }
 
 int skills(){
-    fw.move(127);
+    fly_wheel.move(127);
     //  PUT THE SET POS INTO INITLIZE
     chassis.setPose(-36, -60, 90);
 

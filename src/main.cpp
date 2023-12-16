@@ -20,7 +20,17 @@
     }
 }
 
- 
+//  void cata_function() {
+//     // loop forever
+//     //cata.set_brake_mode(MOTOR_BRAKE_HOLD);
+//     while (true) {
+//         if (limitSwitch.get_value() == 0)
+//             cata.move(127);
+//         else
+//             cata.move(0);
+//         pros::delay(10);
+//     }
+// }
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -31,7 +41,8 @@
 void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate the chassis
-    chassis.setPose({35, -63, 0}); // set the starting position of the robot to (0, 0, 0)
+    //chassis.setPose({35, -63, 0}); // offensive starting position
+    chassis.setPose({-35, -63, 0}); // defensive starting position
     pros::Task screenTask(screen); // create a task to print the position to the screen
     //pros::Task cataTask(cata_function);
     intakeHold.set_value(1);
@@ -67,8 +78,8 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	defAuton();
     intakeHold.set_value(0);
-	offAuton();
 }
 
 /**
@@ -102,9 +113,9 @@ void arcade(int throttle, int turn, float curveGain) {
 void opcontrol() {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     bool wingOpen = false;
-	while(true){
+	intakeHold.set_value(0);
+    while(true){
         wing1.set_value(wingOpen);
-        wing2.set_value(wingOpen);
 
         arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 5);
         if(master.get_digital(DIGITAL_L1)){
@@ -117,14 +128,16 @@ void opcontrol() {
             intakeMotor.move(0);
         }
         if (master.get_digital(DIGITAL_L2)){
-            fw.move(127);
+            fly_wheel.move(127);
         }
         else if(master.get_digital(DIGITAL_R2))
-            fw.move(-127);
+            fly_wheel.move(-127);
+        else if(master.get_digital(DIGITAL_RIGHT))
+            fly_wheel.move(96);
         else
-            fw.move(0);
+            fly_wheel.move(0);
         
-        if(master.get_digital_new_press(DIGITAL_A)) wingOpen = !wingOpen;
+        if(master.get_digital_new_press(DIGITAL_DOWN)) wingOpen = !wingOpen;
 
         pros::delay(10);
         
