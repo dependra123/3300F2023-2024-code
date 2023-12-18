@@ -135,13 +135,30 @@ int offAuton(){
     chassis.turnTo(-20, -13, 1000);
     chassis.moveTo(50, -13, 1000);
     chassis.moveTo(35, -13, 1000);
+    
+    // intakeMotor.move(127);
+    // chassis.moveTo(5, 0, 1000);
+    // pros::delay(1000);
+    // intakeMotor.move(0);
+    // chassis.turnTo(35, -13, 1000);
+    // chassis.moveTo(35, -13, 1000);
+    // chassis.turnTo(50, -13, 1000);
+    // intakeMotor.move(-127);
+    // pros::delay(1000);
+    // intakeMotor.move(0);
+    // chassis.moveTo(25, -13, 1000);
+    // chassis.turnTo(-20, -13, 1000);
+    // chassis.moveTo(50, -13, 1000);
+    // chassis.moveTo(35, -13, 1000);
+
     chassis.turnTo(35, -63, 1000);
     chassis.moveTo(35, -63, 1000);
-    chassis.turnTo(5, -63, 1000);
-    intakeMotor.move(127);
-    chassis.moveTo(4, -63, 1000);
-    pros::delay(1000);
-    intakeMotor.move(0);
+
+    // chassis.turnTo(5, -63, 1000);
+    // intakeMotor.move(127);
+    // chassis.moveTo(4, -63, 1000);
+    // pros::delay(1000);
+    // intakeMotor.move(0);
 
 
 

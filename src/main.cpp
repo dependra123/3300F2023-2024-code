@@ -41,8 +41,8 @@
 void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate the chassis
-    chassis.setPose({35, -63, 0}); // offensive starting position
-    //chassis.setPose({-35, -63, 0}); // defensive starting position
+    //chassis.setPose({35, -63, 0}); // offensive starting position
+    chassis.setPose({35, -63, 0}); // defensive starting position
     pros::Task screenTask(screen); // create a task to print the position to the screen
     //pros::Task cataTask(cata_function);
     intakeHold.set_value(1);
