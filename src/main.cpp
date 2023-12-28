@@ -1,19 +1,51 @@
 #include "main.h"
-#include "extern.h"
 #include "lemlib/api.hpp"
 
 
 
+ void screen() {
+    // loop forever
+    while (true) {
+        lemlib::Pose pose = chassis.getPose(); // get the current position of the robot
+        pros::lcd::print(0, "x: %f", pose.x); // print the x position
+        pros::lcd::print(1, "y: %f", pose.y); // print the y position
+        pros::lcd::print(2, "heading: %f", pose.theta); // print the heading
+        pros::lcd::print(3, " Vert Kp: %f", lateralController.kP); // print the heading
+        pros::lcd::print(4, " Vert Kd: %f", lateralController.kD); // print the heading
+        pros::lcd::print(5, " Horiz Kp: %f", angularController.kP); // print the heading
+        pros::lcd::print(6, " Horiz Kd: %f", angularController.kD); // print the heading
+        pros::lcd::print(7, " prev Kd: %f", angularController.kD); // print the heading
 
+        pros::delay(10);
+    }
+}
+
+//  void cata_function() {
+//     // loop forever
+//     //cata.set_brake_mode(MOTOR_BRAKE_HOLD);
+//     while (true) {
+//         if (limitSwitch.get_value() == 0)
+//             cata.move(127);
+//         else
+//             cata.move(0);
+//         pros::delay(10);
+//     }
+// }
 
 /**
- * Runs initialization code. This occurs as soon as the program is started.
- *
+ * Runs initializatioffAutonon code. This occurs as soon as the program is started.
+ *lib/api.hpp"
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	chassis.calibrate();
+	pros::lcd::initialize(); // initialize brain screen
+    chassis.calibrate(); // calibrate the chassis
+    //chassis.setPose({35, -63, 0}); // offensive starting position
+    chassis.setPose({35, -63, 0}); // defensive starting position
+    pros::Task screenTask(screen); // create a task to print the position to the screen
+    //pros::Task cataTask(cata_function);
+    intakeHold.set_value(1);
 }
 
 /**
@@ -46,7 +78,8 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	
+	offAuton();
+    intakeHold.set_value(0);
 }
 
 /**
@@ -78,13 +111,35 @@ void arcade(int throttle, int turn, float curveGain) {
     drivetrain.rightMotors->move(rightPower);
 }
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	
+    pros::Controller master(pros::E_CONTROLLER_MASTER);
+    bool wingOpen = false;
+	intakeHold.set_value(0);
+    while(true){
+        wing1.set_value(wingOpen);
 
-	while (true) {
-		arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 15);
-		
+        arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 5);
+        if(master.get_digital(DIGITAL_L1)){
+            intakeMotor.move(127);
+        }
+        else if(master.get_digital(DIGITAL_R1)){
+            intakeMotor.move(-127);
+        }
+        else{
+            intakeMotor.move(0);
+        }
+        if (master.get_digital(DIGITAL_L2)){
+            fly_wheel.move(120);
+        }
+        else if(master.get_digital(DIGITAL_R2))
+            fly_wheel.move(-120);
+        else if(master.get_digital(DIGITAL_RIGHT))
+            fly_wheel.move(100);
+        else
+            fly_wheel.move(0);
+        
+        if(master.get_digital_new_press(DIGITAL_DOWN)) wingOpen = !wingOpen;
 
-		pros::delay(20);
-	}
+        pros::delay(10);
+        
+    }
 }

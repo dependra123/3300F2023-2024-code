@@ -36,6 +36,11 @@
 
 #include "api.h"
 
+#include "auton.hpp"
+#include "lemlib/api.hpp"
+#include "extern.hpp"
+
+
 /**
  * You should add more #includes here
  */
@@ -74,7 +79,7 @@ void opcontrol(void);
 #ifdef __cplusplus
 /**
  * You can add C++-only headers here
- */
+*/
 //#include <iostream>
 #endif
 
