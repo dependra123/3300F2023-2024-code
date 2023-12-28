@@ -113,6 +113,7 @@ void arcade(int throttle, int turn, float curveGain) {
 void opcontrol() {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     bool wingOpen = false;
+    
 	intakeHold.set_value(0);
     while(true){
         wing1.set_value(wingOpen);
