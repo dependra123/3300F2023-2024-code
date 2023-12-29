@@ -21,38 +21,41 @@ pros::ADIDigitalOut wing1('A');
 //lemlib::TrackingWheel horizontal(&backRot, 3.25, 2.5);
 
 
-lemlib::OdomSensors_t sensors {nullptr, nullptr, nullptr, nullptr, &imu};
+lemlib::OdomSensors sensors {nullptr, nullptr, nullptr, nullptr, &imu};
 pros::ADIDigitalIn  limitSwitch('H');
 pros::Motor fly_wheel(19);
 
 
 //TODO - CHANGE TRACK WIDTH
-lemlib::Drivetrain_t drivetrain {
-    &leftMotor, // left drivetrain motors
+lemlib::Drivetrain drivetrain (&leftMotor, // left drivetrain motors
     &rightMotor, // right drivetrain motors
     13, // track width
-    3.25, // wheel diameter
-    360 // wheel rpm
-};
+    lemlib::Omniwheel::NEW_275, // wheel diameter
+    450, // wheel rpm
+    2
+);
 // forward/backward PID
-lemlib::ChassisController_t lateralController {
-    8, // kP
-    30, // kD
-    1, // smallErrorRange
-    100, // smallErrorTimeout
-    3, // largeErrorRange
-    500, // largeErrorTimeout
-    5 // slew rate
-};
- 
-// turning PID
-lemlib::ChassisController_t angularController {
-    4, // kP
-    40, // kD
-    1, // smallErrorRange
-    100, // smallErrorTimeout
-    3, // largeErrorRange
-    500, // largeErrorTimeout
-    0 // slew rate
-};
+// lateral motion controller
+lemlib::ControllerSettings linearController(10, // proportional gain (kP)
+                                            0, // integral gain (kI)
+                                            3, // derivative gain (kD)
+                                            3, // anti windup
+                                            1, // small error range, in inches
+                                            100, // small error range timeout, in milliseconds
+                                            3, // large error range, in inches
+                                            500, // large error range timeout, in milliseconds
+                                            20 // maximum acceleration (slew)
+);
+
+// angular motion controller
+lemlib::ControllerSettings angularController(2, // proportional gain (kP)
+                                             0, // integral gain (kI)
+                                             10, // derivative gain (kD)
+                                             3, // anti windup
+                                             1, // small error range, in degrees
+                                             100, // small error range timeout, in milliseconds
+                                             3, // large error range, in degrees
+                                             500, // large error range timeout, in milliseconds
+                                             0 // maximum acceleration (slew)
+);
 lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);
