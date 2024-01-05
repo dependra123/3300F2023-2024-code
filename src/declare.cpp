@@ -58,4 +58,4 @@ lemlib::ControllerSettings angularController(2, // proportional gain (kP)
                                              500, // large error range timeout, in milliseconds
                                              0 // maximum acceleration (slew)
 );
-lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);
+lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors);

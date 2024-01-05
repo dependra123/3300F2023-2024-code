@@ -3,22 +3,7 @@
 
 
 
- void screen() {
-    // loop forever
-    while (true) {
-        lemlib::Pose pose = chassis.getPose(); // get the current position of the robot
-        pros::lcd::print(0, "x: %f", pose.x); // print the x position
-        pros::lcd::print(1, "y: %f", pose.y); // print the y position
-        pros::lcd::print(2, "heading: %f", pose.theta); // print the heading
-        pros::lcd::print(3, " Vert Kp: %f", lateralController.kP); // print the heading
-        pros::lcd::print(4, " Vert Kd: %f", lateralController.kD); // print the heading
-        pros::lcd::print(5, " Horiz Kp: %f", angularController.kP); // print the heading
-        pros::lcd::print(6, " Horiz Kd: %f", angularController.kD); // print the heading
-        pros::lcd::print(7, " prev Kd: %f", angularController.kD); // print the heading
-
-        pros::delay(10);
-    }
-}
+ 
 
 //  void cata_function() {
 //     // loop forever
@@ -43,10 +28,8 @@ void initialize() {
     chassis.calibrate(); // calibrate the chassis
     //chassis.setPose({35, -63, 0}); // offensive starting position
     chassis.setPose({35, -63, 0}); // defensive starting position
-    pros::Task screenTask(screen); // create a task to print the position to the screen
-    //pros::Task cataTask(cata_function);
-    intakeHold.set_value(1);
-}
+   
+  }
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -79,7 +62,7 @@ void competition_initialize() {}
  */
 void autonomous() {
 	test();
-    intakeHold.set_value(0);
+
 }
 
 /**
