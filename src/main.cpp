@@ -112,11 +112,11 @@ void arcade(int throttle, int turn, float curveGain) {
 }
 void opcontrol() {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
-    bool wingOpen = false;
+    //bool wingOpen = false;
     
-	intakeHold.set_value(0);
+	// intakeHold.set_value(0);
     while(true){
-        wing1.set_value(wingOpen);
+        // wing1.set_value(wingOpen);
 
         arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 5);
         if(master.get_digital(DIGITAL_L1)){
@@ -138,7 +138,7 @@ void opcontrol() {
         else
             fly_wheel.move(0);
         
-        if(master.get_digital_new_press(DIGITAL_DOWN)) wingOpen = !wingOpen;
+        // if(master.get_digital_new_press(DIGITAL_DOWN)) wingOpen = !wingOpen;
 
         pros::delay(10);
         

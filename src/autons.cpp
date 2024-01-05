@@ -1,13 +1,13 @@
 #include "main.h"
 
 void intake(bool reverse=false){
-    intakeMotor.move(reverse ? -127: 127);
+    intakeMotor.move(reverse ? 127: -127);
 }
 
-void wing(bool open){
-    wing1.set_value(open);
-  wing2.set_value(open);
-}
+// void wing(bool open){
+//     wing1.set_value(open);
+//   wing2.set_value(open);
+// }
 
 // }
 // void autoTuner(){
@@ -275,14 +275,27 @@ void wing(bool open){
 //     wing(false);
 //     return 0;
 // }
-void offenciveAuton(){
-    chassis.setPose(-10,60,90);
-    //grab triball under elvation
-    chassis.moveToPose(0,60,90,1000);
-    intake();
-    chassis.moveToPose(-50,60,225,2000,{.forwards=false});
-    chassis.waitUntilDone();
-    wing(true);
+// ASSET(sixBallSidePart1_txt);
+// void offenciveAuton(){
+//     chassis.setPose(10,-60,90);
+//     //grab triball under elvation
+//     chassis.moveToPoint(0,-60,1000);
+//     intake();
+//     chassis.waitUntilDone();
+//     chassis.follow(sixBallSidePart1_txt, 6, 5000);
+//     chassis.waitUntil(50);
+//     wing(true);
+//     chassis.waitUntil(60);
+//     wing(false);
+    
 
 
+// }
+int test(){
+    chassis.setPose(0,0,0);
+    chassis.moveToPoint(0, 10, 3000);
+    chassis.moveToPoint(0, 20, 3000, false);
+    chassis.moveToPose(0, 0, 90, 5000);
+
+    return 0;
 }
