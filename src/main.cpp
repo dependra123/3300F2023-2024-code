@@ -78,7 +78,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	offAuton();
+	test();
     intakeHold.set_value(0);
 }
 
