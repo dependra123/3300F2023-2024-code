@@ -305,6 +305,7 @@ int sixBallAuton(){
     chassis.setPose(24,-60,270);
     intake();
     chassis.moveToPoint(5, -60, 1000);
+    chassis.turnTo(10, -60, 1000);
 
     //boomarang to beside net
     chassis.moveToPose(60,-40, 0, 3000, {.forwards = true});
