@@ -4,10 +4,10 @@ void intake(bool reverse=false){
     intakeMotor.move(reverse ? 127: -127);
 }
 
-// void wing(bool open){
-//     wing1.set_value(open);
-//   wing2.set_value(open);
-// }
+void wing(bool open){
+    wing1.set_value(open);
+  wing2.set_value(open);
+}
 
 // }
 // void autoTuner(){
@@ -298,4 +298,45 @@ int test(){
     chassis.moveToPose(0, 0, 90, 5000);
 
     return 0;
+}
+
+int sixBallAuton(){
+    //pick up ball from under elvation
+    chassis.setPose(24,-60,270);
+    intake();
+    chassis.moveToPoint(5, -60, 1000);
+
+    //boomarang to beside net
+    chassis.moveToPose(60,-40, 0, 3000, {.forwards = true});
+    chassis.waitUntil(50);
+    //get from matchload
+    wing(true);
+    chassis.waitUntil(60);
+    wing(false);
+    //outtake and push into net
+    intake(true);
+    chassis.moveToPoint(60,-32, 700);
+    chassis.moveToPoint(40,-40, 700, false);
+    intake();
+    //line up and go for the triball not in middle
+    chassis.moveToPose(12,-24,270, 800);
+    chassis.waitUntilDone();
+    chassis.turnTo(60,0,750);
+    //out take infront of the net
+    intake(true);
+    pros::delay(500);
+    //get the top middle triball and push all into the net
+    intake();
+    chassis.moveToPoint(9,-7,750);
+    chassis.moveToPose(40,0,90,2000);
+    chassis.waitUntil(10);
+    wing(true);
+
+
+
+
+
+
+
+
 }

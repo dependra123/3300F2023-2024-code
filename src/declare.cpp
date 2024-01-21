@@ -2,12 +2,12 @@
 
 float prevKp = 0;
 float prevKd = 0;
-pros::Motor lf(5, pros::E_MOTOR_GEARSET_06, true); // port 1, blue gearbox, not reversed
-pros::Motor lm(4, pros::E_MOTOR_GEARSET_06, true); // port 2, green gearbox, not reversed
-pros::Motor lb(3, pros::E_MOTOR_GEARSET_06, true); // port 2, green gearbox, not reversed
-pros::Motor rf(6, pros::E_MOTOR_GEARSET_06, false); // port 3, red gearbox, reversed
-pros::Motor rm(7, pros::E_MOTOR_GEARSET_06, false); // port 3, red gearbox, reversed
-pros::Motor rb(8, pros::E_MOTOR_GEARSET_06, false); // port 4, red gearbox, reversed
+pros::Motor rf(5, pros::E_MOTOR_GEARSET_06, true); // port 1, blue gearbox, not reversed
+pros::Motor rm(4, pros::E_MOTOR_GEARSET_06, false); // port 2, green gearbox, reversed
+pros::Motor rb(3, pros::E_MOTOR_GEARSET_06, false); // port 2, green gearbox, not reversed
+pros::Motor lf(6, pros::E_MOTOR_GEARSET_06, false); // port 3, red gearbox, reversedno
+pros::Motor lm(7, pros::E_MOTOR_GEARSET_06, true); // port 3, red gearbox, not reversed
+pros::Motor lb(8, pros::E_MOTOR_GEARSET_06, true); // port 4, red gearbox, reversed
 
 pros::MotorGroup rightMotor({rf,rm, rb});
 pros::MotorGroup leftMotor({lf,lm, lb});
