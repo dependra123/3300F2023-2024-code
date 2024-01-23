@@ -2,57 +2,60 @@
 
 float prevKp = 0;
 float prevKd = 0;
-pros::Motor lf(13, pros::E_MOTOR_GEARSET_06, true); // port 1, blue gearbox, not reversed
-pros::Motor lm(14, pros::E_MOTOR_GEARSET_06, true); // port 2, green gearbox, not reversed
-pros::Motor lb(15, pros::E_MOTOR_GEARSET_06, true); // port 2, green gearbox, not reversed
-pros::Motor rf(18, pros::E_MOTOR_GEARSET_06, false); // port 3, red gearbox, reversed
-pros::Motor rm(17, pros::E_MOTOR_GEARSET_06, false); // port 3, red gearbox, reversed
-pros::Motor rb(16, pros::E_MOTOR_GEARSET_06, false); // port 4, red gearbox, reversed
+pros::Motor rf(5, pros::E_MOTOR_GEARSET_06, true); // port 1, blue gearbox, not reversed
+pros::Motor rm(4, pros::E_MOTOR_GEARSET_06, false); // port 2, green gearbox, reversed
+pros::Motor rb(3, pros::E_MOTOR_GEARSET_06, false); // port 2, green gearbox, not reversed
+pros::Motor lf(6, pros::E_MOTOR_GEARSET_06, false); // port 3, red gearbox, reversedno
+pros::Motor lm(7, pros::E_MOTOR_GEARSET_06, true); // port 3, red gearbox, not reversed
+pros::Motor lb(8, pros::E_MOTOR_GEARSET_06, true); // port 4, red gearbox, reversed
 
 pros::MotorGroup rightMotor({rf,rm, rb});
 pros::MotorGroup leftMotor({lf,lm, lb});
 
 // pros::Rotation backRot(7);
-pros::IMU imu(20);
-pros::Motor intakeMotor(10, pros::E_MOTOR_GEARSET_06, true);
-pros::ADIDigitalOut intakeHold('G');
-pros::ADIDigitalOut wing1('A');
+pros::IMU imu(10);
+pros::Motor intakeMotor(1, pros::E_MOTOR_GEARSET_06, true);
+// pros::ADIDigitalOut intakeHold('G');
+// pros::ADIDigitalOut wing1('A');
 
 //lemlib::TrackingWheel horizontal(&backRot, 3.25, 2.5);
 
 
-lemlib::OdomSensors_t sensors {nullptr, nullptr, nullptr, nullptr, &imu};
-pros::ADIDigitalIn  limitSwitch('H');
-pros::Motor fly_wheel(19);
+lemlib::OdomSensors sensors {nullptr, nullptr, nullptr, nullptr, &imu};
+// pros::ADIDigitalIn  limitSwitch('H');
+pros::Motor fly_wheel(2);
 
 
 //TODO - CHANGE TRACK WIDTH
-lemlib::Drivetrain_t drivetrain {
-    &leftMotor, // left drivetrain motors
+lemlib::Drivetrain drivetrain (&leftMotor, // left drivetrain motors
     &rightMotor, // right drivetrain motors
     13, // track width
-    3.25, // wheel diameter
-    360 // wheel rpm
-};
+    lemlib::Omniwheel::NEW_275, // wheel diameter
+    450, // wheel rpm
+    2
+);
 // forward/backward PID
-lemlib::ChassisController_t lateralController {
-    8, // kP
-    30, // kD
-    1, // smallErrorRange
-    100, // smallErrorTimeout
-    3, // largeErrorRange
-    500, // largeErrorTimeout
-    5 // slew rate
-};
- 
-// turning PID
-lemlib::ChassisController_t angularController {
-    4, // kP
-    40, // kD
-    1, // smallErrorRange
-    100, // smallErrorTimeout
-    3, // largeErrorRange
-    500, // largeErrorTimeout
-    0 // slew rate
-};
-lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);
+// lateral motion controller
+lemlib::ControllerSettings linearController(10, // proportional gain (kP)
+                                            0, // integral gain (kI)
+                                            3, // derivative gain (kD)
+                                            3, // anti windup
+                                            1, // small error range, in inches
+                                            100, // small error range timeout, in milliseconds
+                                            3, // large error range, in inches
+                                            500, // large error range timeout, in milliseconds
+                                            20 // maximum acceleration (slew)
+);
+
+// angular motion controller
+lemlib::ControllerSettings angularController(2, // proportional gain (kP)
+                                             0, // integral gain (kI)
+                                             10, // derivative gain (kD)
+                                             3, // anti windup
+                                             1, // small error range, in degrees  
+                                             100, // small error range timeout, in milliseconds
+                                             3, // large error range, in degrees
+                                             500, // large error range timeout, in milliseconds
+                                             0 // maximum acceleration (slew)
+);
+lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors);

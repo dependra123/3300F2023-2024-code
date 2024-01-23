@@ -26,18 +26,18 @@ extern pros::Motor intakeMotor;
 extern lemlib::TrackingWheel horizontal;
 
 
-extern lemlib::OdomSensors_t sensors ;
+extern lemlib::OdomSensors sensors ;
 extern pros::ADIDigitalIn  limitSwitch;
 extern pros::Motor fly_wheel;
 
 
 //TODO - CHANGE TRACK WIDTH
-extern lemlib::Drivetrain_t drivetrain;
+extern lemlib::Drivetrain drivetrain;
 // forward/backward PID
-extern lemlib::ChassisController_t lateralController;
+extern lemlib::ControllerSettings lateralController;
  
 // turning PID
-extern lemlib::ChassisController_t angularController;
+extern lemlib::ControllerSettings angularController;
 extern lemlib::Chassis chassis;
 
 extern pros::ADIDigitalOut intakeHold;
