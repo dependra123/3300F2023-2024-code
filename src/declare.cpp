@@ -3,17 +3,17 @@
 float prevKp = 0;
 float prevKd = 0;
 pros::Motor rf(5, pros::E_MOTOR_GEARSET_06, true); // port 1, blue gearbox, not reversed
-pros::Motor rm(4, pros::E_MOTOR_GEARSET_06, false); // port 2, green gearbox, reversed
+pros::Motor rm(2, pros::E_MOTOR_GEARSET_06, false); // port 2, green gearbox, reversed
 pros::Motor rb(3, pros::E_MOTOR_GEARSET_06, false); // port 2, green gearbox, not reversed
 pros::Motor lf(6, pros::E_MOTOR_GEARSET_06, false); // port 3, red gearbox, reversedno
 pros::Motor lm(7, pros::E_MOTOR_GEARSET_06, true); // port 3, red gearbox, not reversed
-pros::Motor lb(8, pros::E_MOTOR_GEARSET_06, true); // port 4, red gearbox, reversed
+pros::Motor lb(9, pros::E_MOTOR_GEARSET_06, true); // port 4, red gearbox, reversed
 
 pros::MotorGroup rightMotor({rf,rm, rb});
 pros::MotorGroup leftMotor({lf,lm, lb});
 
 // pros::Rotation backRot(7);
-pros::IMU imu(10);
+pros::IMU imu(19);
 pros::Motor intakeMotor(1, pros::E_MOTOR_GEARSET_06, true);
 // pros::ADIDigitalOut intakeHold('G');
 // pros::ADIDigitalOut wing1('A');
@@ -23,7 +23,7 @@ pros::Motor intakeMotor(1, pros::E_MOTOR_GEARSET_06, true);
 
 lemlib::OdomSensors sensors {nullptr, nullptr, nullptr, nullptr, &imu};
 // pros::ADIDigitalIn  limitSwitch('H');
-pros::Motor fly_wheel(2);
+pros::Motor fly_wheel(10);
 
 
 //TODO - CHANGE TRACK WIDTH
@@ -32,7 +32,7 @@ lemlib::Drivetrain drivetrain (&leftMotor, // left drivetrain motors
     13, // track width
     lemlib::Omniwheel::NEW_275, // wheel diameter
     450, // wheel rpm
-    2
+    5
 );
 // forward/backward PID
 // lateral motion controller

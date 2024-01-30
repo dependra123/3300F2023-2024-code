@@ -1,13 +1,13 @@
 #include "main.h"
 
 void intake(bool reverse=false){
-    intakeMotor.move(reverse ? 127: -127);
+    intakeMotor.move(reverse ? -127: 127);
 }
 
-void wing(bool open){
-    wing1.set_value(open);
-  wing2.set_value(open);
-}
+// void wing(bool open){
+//     wing1.set_value(open);
+//   wing2.set_value(open);
+// }
 
 // }
 // void autoTuner(){
@@ -31,7 +31,7 @@ void wing(bool open){
 //             prevKp = nextKp;
 //             lateralController.kD = nextKd;
 //             lateralController.kP = tuned ? nextKp : nextKp+=.5;
-//             chassis.moveTo(0, (count % 2 == 0)? 10:0, 3000, true);
+//             chassis.moveToPoint(0, (count % 2 == 0)? 10:0, 3000, true);
             
 //             driveSetteled = false;
 //         }
@@ -68,8 +68,8 @@ void wing(bool open){
 
 // }
 // int test(){
-//     chassis.moveTo(0, 10, 100);
-//     chassis.moveTo(0, 0, 100);
+//     chassis.moveToPoint(0, 10, 100);
+//     chassis.moveToPoint(0, 0, 100);
 //     chassis.turnTo(0, 0, 100);
 //     return 0;
     
@@ -77,7 +77,7 @@ void wing(bool open){
 
 // // int closeSideQual(){
 // //     intake();
-// //     chassis.moveTo(-5, 60, 2500);
+// //     chassis.moveToPoint(-5, 60, 2500);
 // //     pros::delay(500);
 // //     intakeMotor.move(0);
 // //     pros::Task openWingMiddle([=](){
@@ -98,20 +98,20 @@ void wing(bool open){
 // //     pros::delay(300);
 // //     intake();
 // //     wing1.set_value(false);
-// //     chassis.moveTo(-10,23, 2000);
+// //     chassis.moveToPoint(-10,23, 2000);
 // //     pros::delay(300);
 // //     intakeMotor.move(0);
-// //     chassis.moveTo(-20,23, 1000);
+// //     chassis.moveToPoint(-20,23, 1000);
 // //     pros::delay(100);
 // //     chassis.turnTo(-47, 0, 800);
 // //     wing1.set_value(true);
 // //     wing2.set_value(true);
-// //     chassis.moveTo(-41, 0, 1500);
+// //     chassis.moveToPoint(-41, 0, 1500);
 // //     wing1.set_value(false);
 // //     wing2.set_value(false);
 // //     chassis.turnTo(-32, 0, 1000);
 // //     intake();
-// //     chassis.moveTo(-32,0,2500);
+// //     chassis.moveToPoint(-32,0,2500);
 // //     pros::delay(500);
 // //     intakeMotor.move(0);
 
@@ -123,92 +123,95 @@ void wing(bool open){
 // int offAuton(){
 //     intake(true);
 //     intakeMotor.move(127);
-//     chassis.moveTo(35, -13, 1000);
+//     chassis.moveToPoint(35, -13, 1000);
 //     chassis.turnTo(50, -13, 1000);
-//     chassis.moveTo(50, -13, 1000);
+//     chassis.moveToPoint(50, -13, 1000);
 //     intakeMotor.move(-127);
 //     pros::delay(1000);
 //     intakeMotor.move(0);
-//     chassis.moveTo(25, -13, 1000);
+//     chassis.moveToPoint(25, -13, 1000);
 //     chassis.turnTo(-20, -13, 1000);
-//     chassis.moveTo(50, -13, 1000);
-//     chassis.moveTo(35, -13, 1000);
+//     chassis.moveToPoint(50, -13, 1000);
+//     chassis.moveToPoint(35, -13, 1000);
     
 //     // intakeMotor.move(127);
-//     // chassis.moveTo(5, 0, 1000);
+//     // chassis.moveToPoint(5, 0, 1000);
 //     // pros::delay(1000);
 //     // intakeMotor.move(0);
 //     // chassis.turnTo(35, -13, 1000);
-//     // chassis.moveTo(35, -13, 1000);
+//     // chassis.moveToPoint(35, -13, 1000);
 //     // chassis.turnTo(50, -13, 1000);
 //     // intakeMotor.move(-127);
 //     // pros::delay(1000);
 //     // intakeMotor.move(0);
-//     // chassis.moveTo(25, -13, 1000);
+//     // chassis.moveToPoint(25, -13, 1000);
 //     // chassis.turnTo(-20, -13, 1000);
-//     // chassis.moveTo(50, -13, 1000);
-//     // chassis.moveTo(35, -13, 1000);
+//     // chassis.moveToPoint(50, -13, 1000);
+//     // chassis.moveToPoint(35, -13, 1000);
 
 //     chassis.turnTo(35, -63, 1000);
-//     chassis.moveTo(35, -63, 1000);
+//     chassis.moveToPoint(35, -63, 1000);
 
 //     // chassis.turnTo(5, -63, 1000);
 //     // intakeMotor.move(127);
-//     // chassis.moveTo(4, -63, 1000);
+//     // chassis.moveToPoint(4, -63, 1000);
 //     // pros::delay(1000);
 //     // intakeMotor.move(0);
 
 
 
-//     // chassis.moveTo(0, 0, 5000);
-//     // chassis.moveTo(0.722, 32.411, 5000);
-//     // chassis.moveTo(-0.481, -13.288, 5000);
+//     // chassis.moveToPoint(0, 0, 5000);
+//     // chassis.moveToPoint(0.722, 32.411, 5000);
+//     // chassis.moveToPoint(-0.481, -13.288, 5000);
 //     // wing(true);
     
 
 //     return 0;
 // }
 
-// int defAuton(){
-//     intake(true);
-//     intakeMotor.move(127);
-//     chassis.turnTo(-58, -35, 1000);
-//     chassis.moveTo(-58, -35, 1000);
-//     chassis.turnTo(-58, -25, 1000);
-//     intakeMotor.move(-127);
-//     pros::delay(1000);
-//     intakeMotor.move(0);
-//     chassis.moveTo(-58, -45, 1000);
-//     chassis.turnTo(-58, -59, 1000);
-//     chassis.moveTo(-58, -23.5, 1000);
-//     chassis.moveTo(-58, -35, 1000);
-//     chassis.turnTo(-24, -35, 1000);
-//     chassis.moveTo(-24, -35, 1000);
-//     chassis.turnTo(-24, -1, 1000);
-//     intakeMotor.move(127);
-//     chassis.moveTo(-24, -7, 1000);
-//     pros::delay(500);
-//     intakeMotor.move(0);
-//     chassis.turnTo(-10, -20, 1000);
-//     chassis.moveTo(-10, -20, 1000);
-//     chassis.turnTo(15, -20, 1000);
-//     intakeMotor.move(-127);
-//     pros::delay(2000);
-//     intakeMotor.move(0);
+int defAuton(){
+    chassis.setPose({-35, -60, 0});
+    intake(true);
+    intakeMotor.move(127);
+    chassis.moveToPoint(-60, -30, 1000);
+    chassis.turnTo(-60, -25, 1000);
+    intakeMotor.move(-127);
+    pros::delay(1000);
+    intakeMotor.move(0);
+    chassis.moveToPoint(-60, -40, 1000, false);
+    pros::delay(500);
+    chassis.moveToPose(-23, -5, 3500, {.forwards = true});
+    intakeMotor.move(127);
+    chassis.moveToPoint(-6.5, -5, 1000);
+    intakeMotor.move(-127);
+
+    /*chassis.turnTo(-24, -35, 1000);
+    chassis.moveToPoint(-24, -35, 1000);
+    chassis.turnTo(-24, -1, 1000);
+    intakeMotor.move(127);
+    chassis.moveToPoint(-24, -7, 1000);
+    pros::delay(500);
+    intakeMotor.move(0);
+    chassis.turnTo(-10, -20, 1000);
+    chassis.moveToPoint(-10, -20, 1000);
+    chassis.turnTo(15, -20, 1000);
+    intakeMotor.move(-127);
+    pros::delay(2000);
+    intakeMotor.move(0);*/
 
 
     
 //     /*
-//     chassis.moveTo(-60, 0, 2000);
+//     chassis.moveToPoint(-60, 0, 2000);
 //     chassis.turnTo(-10, -30, 2000);
-//     chassis.moveTo(-10, -30, 2000);
+//     chassis.moveToPoint(-10, -30, 2000);
 //     chassis.turnTo(25, -30, 2000);
 //     intakeMotor.move(-127);
 //     pros::delay(2000);
 //     intakeMotor.move(0);
 //     chassis.turnTo(-10, 0, 2000);
 //     intakeMotor.move(127);
-//     chassis.moveTo(-10, 0, 2000);
+//     chassis.moveToPoint(-10, 0, 2000);
 //     chassis.turnTo(30, 0, 2000);
 //     intakeMotor.move(-127);
 //     pros::delay(2000);
@@ -216,21 +219,21 @@ void wing(bool open){
 //     */
 
     
-//     return 0;
-// }
+    return 0;
+}
 // int testOffAuton(){
 //     intake();
-//     chassis.moveTo(3, 60, 5000, 300);
+//     chassis.moveToPoint(3, 60, 5000, 300);
     
 //     chassis.turnTo(50, -60, 5000);
-//     chassis.moveTo(50, -60, 5000, 300);
+//     chassis.moveToPoint(50, -60, 5000, 300);
     
 //     wing(true);
 //     intake(true);
-//     chassis.moveTo(62, -45, 5000,120);
+//     chassis.moveToPoint(62, -45, 5000,120);
 //     wing(false);
     
-//     chassis.moveTo(62, -25, 5000,250);
+//     chassis.moveToPoint(62, -25, 5000,250);
     
 
 
@@ -243,35 +246,35 @@ void wing(bool open){
 //     chassis.setPose(-36, -60, 90);
 
 //     //Go to matchload and shoot triballs
-//     chassis.moveTo(-55,-50,1500, 360);
+//     chassis.moveToPoint(-55,-50,1500, 360);
 //     chassis.turnTo(45, 0, 1500);
 //     pros::delay(25000);
 
 //     //push alliacne triball into net
 //     chassis.turnTo(-60,-25, 1500, true);
-//     chassis.moveTo(-60,-25,1500, 360);
-//     chassis.moveTo(-25, -60,360);
+//     chassis.moveToPoint(-60,-25,1500, 360);
+//     chassis.moveToPoint(-25, -60,360);
     
 //     //go to other side
 //     chassis.turnTo(36, -60, 1500, true);
-//     chassis.moveTo(36, -60, 1500,300);
+//     chassis.moveToPoint(36, -60, 1500,300);
 
 //     //push on side
 //     chassis.turnTo(60,-25, 1500, true);
-//     chassis.moveTo(60,-25,1500, 360);
+//     chassis.moveToPoint(60,-25,1500, 360);
 
 //     //push from front
-//     chassis.moveTo(48,-48, 1500, 360);
-//     chassis.moveTo(10,10,1500,300);
+//     chassis.moveToPoint(48,-48, 1500, 360);
+//     chassis.moveToPoint(10,10,1500,300);
 //     chassis.turnTo(45,0,750,true);
 //     wing(true);
-//     chassis.moveTo(45,0,750);
+//     chassis.moveToPoint(45,0,750);
 //     wing(false);
 
 //     //push from side
-//     chassis.moveTo(10,35,1700, 360);
+//     chassis.moveToPoint(10,35,1700, 360);
 //     wing(true);
-//     chassis.moveTo(40,12,750);
+//     chassis.moveToPoint(40,12,750);
 //     wing(false);
 //     return 0;
 // }
@@ -279,7 +282,7 @@ void wing(bool open){
 // void offenciveAuton(){
 //     chassis.setPose(10,-60,90);
 //     //grab triball under elvation
-//     chassis.moveToPoint(0,-60,1000);
+//     chassis.moveToPointPoint(0,-60,1000);
 //     intake();
 //     chassis.waitUntilDone();
 //     chassis.follow(sixBallSidePart1_txt, 6, 5000);
@@ -291,36 +294,38 @@ void wing(bool open){
 
 
 // }
-int test(){
-    chassis.setPose(0,0,0);
-    chassis.moveToPoint(0, 10, 3000);
-    chassis.moveToPoint(0, 20, 3000, false);
-    chassis.moveToPose(0, 0, 90, 5000);
+// int test(){
+//     chassis.setPose(0,0,0);
+//     chassis.moveToPointPoint(0, 10, 3000);
+//     chassis.moveToPointPoint(0, 20, 3000, false);
+//     chassis.moveToPointPose(0, 0, 90, 5000);
 
-    return 0;
-}
+//     return 0;
+// }
 
 int sixBallAuton(){
     //pick up ball from under elvation
-    chassis.setPose(24,-60,270);
+    chassis.setPose(24,-58,270);
     intake();
     chassis.moveToPoint(5, -60, 1000);
-    chassis.turnTo(10, -60, 1000);
+    
 
     //boomarang to beside net
-    chassis.moveToPose(60,-40, 0, 3000, {.forwards = true});
+    chassis.moveToPose(62,-35, 0, 3000, {.forwards = true});
     chassis.waitUntil(50);
     //get from matchload
-    wing(true);
+    //wing(true);
     chassis.waitUntil(60);
-    wing(false);
+    //wing(false);
     //outtake and push into net
     intake(true);
-    chassis.moveToPoint(60,-32, 700);
-    chassis.moveToPoint(40,-40, 700, false);
+    chassis.moveToPoint(60,-30, 700);
+    chassis.moveToPoint(58, -45, 1000, false);
     intake();
+    chassis.moveToPoint(4,-24, 700);
     //line up and go for the triball not in middle
-    chassis.moveToPose(12,-24,270, 800);
+    chassis.turnTo(12, -24, 750);
+    chassis.moveToPoint(12,-24, 200, false);
     chassis.waitUntilDone();
     chassis.turnTo(60,0,750);
     //out take infront of the net
@@ -329,9 +334,10 @@ int sixBallAuton(){
     //get the top middle triball and push all into the net
     intake();
     chassis.moveToPoint(9,-7,750);
-    chassis.moveToPose(40,0,90,2000);
+    chassis.moveToPoint(40,0, 2000);
+    intake(true);
     chassis.waitUntil(10);
-    wing(true);
+    //wing(true);
 
 
 

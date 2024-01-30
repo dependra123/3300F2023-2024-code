@@ -27,7 +27,7 @@ void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate the chassis
     //chassis.setPose({35, -63, 0}); // offensive starting position
-    chassis.setPose({35, -63, 0}); // defensive starting position
+    //chassis.setPose({35, -63, 0}); // defensive starting position
    
   }
 
@@ -61,7 +61,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	sixBallAuton()
+	defAuton();
 
 }
 
