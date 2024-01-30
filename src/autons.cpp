@@ -170,20 +170,27 @@ void intake(bool reverse=false){
 // }
 
 int defAuton(){
-    chassis.setPose({-35, -60, 0});
-    intake(true);
+    chassis.setPose({-36, -61, 0});
+    chassis.moveToPoint(-36, -58, 1000);
     intakeMotor.move(127);
-    chassis.moveToPoint(-60, -30, 1000);
-    chassis.turnTo(-60, -25, 1000);
+    chassis.moveToPoint(-60, -35, 1000);
+    chassis.turnTo(-60, -28, 1000);
     intakeMotor.move(-127);
     pros::delay(1000);
     intakeMotor.move(0);
     chassis.moveToPoint(-60, -40, 1000, false);
-    pros::delay(500);
-    chassis.moveToPose(-23, -5, 3500, {.forwards = true});
+    chassis.turnTo(-60, -60, 1000);
+    chassis.moveToPoint(-60, -27, 1000, false);
+    pros::delay(1000);
+    chassis.moveToPoint(-60, -40, 1000);
+    chassis.moveToPose(-25, -1, 0, 3500, {.forwards = true});
     intakeMotor.move(127);
-    chassis.moveToPoint(-6.5, -5, 1000);
+    chassis.turnTo(-40, -60, 750);
+    chassis.moveToPoint(-100, -58, 1000);
+    pros::delay(1000);
+    chassis.turnTo(0, -60, 750);
     intakeMotor.move(-127);
+    chassis.moveToPoint(-7, -60, 1000, true, 100);
 
     /*chassis.turnTo(-24, -35, 1000);
     chassis.moveToPoint(-24, -35, 1000);
