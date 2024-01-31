@@ -247,44 +247,49 @@ int defAuton(){
 //     return 0;
 // }
 
-// int skills(){
-//     fly_wheel.move(127);
-//     //  PUT THE SET POS INTO INITLIZE
-//     chassis.setPose(-36, -60, 90);
-
-//     //Go to matchload and shoot triballs
-//     chassis.moveToPoint(-55,-50,1500, 360);
-//     chassis.turnTo(45, 0, 1500);
-//     pros::delay(25000);
-
-//     //push alliacne triball into net
-//     chassis.turnTo(-60,-25, 1500, true);
-//     chassis.moveToPoint(-60,-25,1500, 360);
-//     chassis.moveToPoint(-25, -60,360);
+int skills(){
+    chassis.setPose(-48,-55,315);
+    intake();
+    chassis.moveToPoint(-62.5,-40, 1000);
+    intake(true);
+    chassis.moveToPoint(-63, -26, 1500);
+    chassis.moveToPose(-67, -45, 70, 1300, {.forwards=false});
+    intakeMotor.move(0);
+    fly_wheel.move(-127);
+    drivetrain.leftMotors->set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+    drivetrain.rightMotors->set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+    drivetrain.leftMotors->brake();
+    drivetrain.rightMotors->brake();
     
-//     //go to other side
-//     chassis.turnTo(36, -60, 1500, true);
-//     chassis.moveToPoint(36, -60, 1500,300);
+    pros::delay(30000);
+    drivetrain.leftMotors->set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+    drivetrain.rightMotors->set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+    fly_wheel.move(0);
+    chassis.moveToPoint(-28,-60,1000);
+    chassis.moveToPose(57,-20,0,3500);
+    chassis.waitUntilDone();
+    chassis.setPose(57,-22,0);
+    //add wings here
+    chassis.moveToPoint(57, -35,1000, false);
+    chassis.moveToPoint(10,-35,1000);
+    chassis.moveToPoint(48, -8, 1000);
 
-//     //push on side
-//     chassis.turnTo(60,-25, 1500, true);
-//     chassis.moveToPoint(60,-25,1500, 360);
+    chassis.moveToPoint(10,0,1000,false);
+    chassis.turnTo(48,0, 1000);
+    chassis.moveToPoint(48,0, 2000, true, 90);
+        //open wings
 
-//     //push from front
-//     chassis.moveToPoint(48,-48, 1500, 360);
-//     chassis.moveToPoint(10,10,1500,300);
-//     chassis.turnTo(45,0,750,true);
-//     wing(true);
-//     chassis.moveToPoint(45,0,750);
-//     wing(false);
+    chassis.moveToPoint(5, 16, 1000);
+    chassis.moveToPose(48, 10, 90, 2000);
+    
 
-//     //push from side
-//     chassis.moveToPoint(10,35,1700, 360);
-//     wing(true);
-//     chassis.moveToPoint(40,12,750);
-//     wing(false);
-//     return 0;
-// }
+
+
+
+
+
+    return 0;
+}
 // ASSET(sixBallSidePart1_txt);
 // void offenciveAuton(){
 //     chassis.setPose(10,-60,90);
@@ -348,7 +353,7 @@ int sixBallAuton(){
 
 
 
-
+    return 0;
 
 
 
