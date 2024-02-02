@@ -4,10 +4,10 @@ void intake(bool reverse=false){
     intakeMotor.move(reverse ? -127: 127);
 }
 
-// void wing(bool open){
-//     wing1.set_value(open);
-//   wing2.set_value(open);
-// }
+void wing(bool open){
+    wing1.set_value(open);
+  wing2.set_value(open);
+}
 
 // }
 // void autoTuner(){
@@ -186,7 +186,7 @@ int defAuton(){
     chassis.moveToPose(-25, -1, 0, 3500, {.forwards = true});
     intakeMotor.move(127);
     chassis.turnTo(-40, -60, 750);
-    chassis.moveToPoint(-100, -58, 1000);
+    chassis.moveToPoint(-55, -45, 1000);
     pros::delay(1000);
     chassis.turnTo(0, -60, 750);
     intakeMotor.move(-127);
@@ -270,20 +270,28 @@ int skills(){
     chassis.waitUntilDone();
     chassis.setPose(57,-22,0);
     //add wings here
+
     chassis.moveToPoint(57, -35,1000, false);
     chassis.moveToPoint(10,-35,1000);
     chassis.moveToPoint(48, -8, 1000);
 
+    wing(true);
+
     chassis.moveToPoint(10,0,1000,false);
+
+    wing(false);
+
     chassis.turnTo(48,0, 1000);
     chassis.moveToPoint(48,0, 2000, true, 90);
         //open wings
 
+    wing(true);
+
     chassis.moveToPoint(5, 16, 1000);
+
+    wing(false);
+
     chassis.moveToPose(48, 10, 90, 2000);
-    
-
-
 
 
 

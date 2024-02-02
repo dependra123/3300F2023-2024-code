@@ -61,7 +61,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	skills();
+	defAuton();
 
 }
 
@@ -95,9 +95,9 @@ void arcade(int throttle, int turn, float curveGain) {
 }
 void opcontrol() {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
-    //bool wingOpen = false;
-    
-	// intakeHold.set_value(0);
+    bool wingOpen = false;
+
+	intakeHold.set_value(0);
     while(true){
         // wing1.set_value(wingOpen);
 
@@ -114,12 +114,18 @@ void opcontrol() {
         if (master.get_digital(DIGITAL_L2)){
             fly_wheel.move(120);
         }
-        else if(master.get_digital(DIGITAL_R2))
-            fly_wheel.move(-120);
-        else if(master.get_digital(DIGITAL_RIGHT))
-            fly_wheel.move(100);
+        // else if(master.get_digital(DIGITAL_R2))
+        //     fly_wheel.move(-120);
+        // else if(master.get_digital(DIGITAL_RIGHT))
+        //     fly_wheel.move(100);
         else
             fly_wheel.move(0);
+
+        if (master.get_digital_new_press(DIGITAL_Y))
+            wingOpen = !wingOpen;
+
+        wing1.set_value(wingOpen);
+        wing2.set_value(wingOpen);
         
         // if(master.get_digital_new_press(DIGITAL_DOWN)) wingOpen = !wingOpen;
 
