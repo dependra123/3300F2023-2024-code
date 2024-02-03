@@ -1,4 +1,5 @@
 #include "main.h"
+#include "autoSelect/selection.h"
 #include "lemlib/api.hpp"
 
 
@@ -29,6 +30,7 @@ void initialize() {
     //chassis.setPose({35, -63, 0}); // offensive starting position
     //chassis.setPose({35, -63, 0}); // defensive starting position
     intakeHold.set_value(0);
+    selector::init();
   }
 
 /**
@@ -62,7 +64,24 @@ void competition_initialize() {}
  */
 void autonomous() {
     intakeHold.set_value(1);
-	defAuton();
+    if(selector::auton == 1){
+        defAuton();
+    }
+    if(selector::auton == 2){
+        sixBallAuton();
+    }
+    if(selector::auton == 0){
+        skills();
+    }
+    if(selector::auton == -1){
+        defAuton();
+    }
+    if(selector::auton == -2){
+        sixBallAuton();
+    }
+
+
+	
 
 }
 
@@ -97,7 +116,7 @@ void arcade(int throttle, int turn, float curveGain) {
 void opcontrol() {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     bool wingOpen = false;
-
+    bool hangToggle =false;
 	intakeHold.set_value(1);
     while(true){
         // wing1.set_value(wingOpen);
@@ -124,6 +143,11 @@ void opcontrol() {
 
         if (master.get_digital_new_press(DIGITAL_Y))
             wingOpen = !wingOpen;
+
+        if(master.get_digital(DIGITAL_X)){
+            hangToggle = !hangToggle;
+        }
+        hang.set_value(hangToggle);
 
         wing1.set_value(wingOpen);
         wing2.set_value(wingOpen);

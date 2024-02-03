@@ -171,16 +171,23 @@ void wing(bool open){
 
 int defAuton(){
     chassis.setPose(-48,-55,315);
+    // start intake and move toward net
     intake();
     chassis.moveToPoint(-62.5,-40, 1000);
+    hang.set_value(1);
+    // outake and score
     intake(true);
     chassis.moveToPoint(-63, -26, 1500);
+    hang.set_value(false);
+    // back up and move toward middle triball
     chassis.moveToPoint(-63,-40, 1000, false);
-    chassis.moveToPose(-35, -1, 0, 3500, {.forwards = true});
+    chassis.moveToPose(-35, -1, 0, 2500, {.forwards = true});
+    // intake and move down near starting pos
     intakeMotor.move(127);
     chassis.turnTo(-40, -60, 750);
     chassis.moveToPoint(-60, -45, 1000);
     pros::delay(1000);
+    // outake push triballs onto other side
     chassis.turnTo(0, -60, 750);
     intakeMotor.move(-127);
     chassis.moveToPoint(-20, -58, 1000, true, 100);

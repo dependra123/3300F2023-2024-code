@@ -18,6 +18,7 @@ pros::Motor intakeMotor(1, pros::E_MOTOR_GEARSET_06, true);
 pros::ADIDigitalOut intakeHold('C');
 pros::ADIDigitalOut wing1('A');
 pros::ADIDigitalOut wing2('B');
+pros::ADIDigitalOut hang('D');
 
 //lemlib::TrackingWheel horizontal(&backRot, 3.25, 2.5);
 
