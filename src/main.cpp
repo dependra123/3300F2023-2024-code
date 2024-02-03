@@ -144,7 +144,7 @@ void opcontrol() {
         if (master.get_digital_new_press(DIGITAL_Y))
             wingOpen = !wingOpen;
 
-        if(master.get_digital(DIGITAL_X)){
+        if(master.get_digital_new_press(DIGITAL_X)){
             hangToggle = !hangToggle;
         }
         hang.set_value(hangToggle);

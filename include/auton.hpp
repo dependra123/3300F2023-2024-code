@@ -9,3 +9,4 @@ int defAuton();
 int testOffAuton();
 int skills();
 int sixBallAuton();
+int quick_off();

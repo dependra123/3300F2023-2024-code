@@ -190,7 +190,7 @@ int defAuton(){
     // outake push triballs onto other side
     chassis.turnTo(0, -60, 750);
     intakeMotor.move(-127);
-    chassis.moveToPoint(-20, -58, 1000, true, 100);
+    chassis.moveToPoint(-25, -58, 1000, true, 100);
 
     /*chassis.turnTo(-24, -35, 1000);
     chassis.moveToPoint(-24, -35, 1000);
@@ -355,5 +355,15 @@ int sixBallAuton(){
     // chassis.waitUntilDone();
     // wing(false);
     // chassis.moveToPoint(12, -36, 1000);
+    return 0;
+}
+
+int quick_off(){
+
+    chassis.setPose(48,-55,45);
+    intake();
+    chassis.moveToPoint(62.5,-40, 1000);
+    intake(true);
+    chassis.moveToPoint(63, -26, 1500);
     return 0;
 }
