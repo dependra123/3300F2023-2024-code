@@ -170,27 +170,20 @@ void wing(bool open){
 // }
 
 int defAuton(){
-    chassis.setPose({-36, -61, 0});
-    chassis.moveToPoint(-36, -58, 1000);
-    intakeMotor.move(127);
-    chassis.moveToPoint(-60, -35, 1000);
-    chassis.turnTo(-60, -28, 1000);
-    intakeMotor.move(-127);
-    pros::delay(1000);
-    intakeMotor.move(0);
-    chassis.moveToPoint(-60, -40, 1000, false);
-    chassis.turnTo(-60, -60, 1000);
-    chassis.moveToPoint(-60, -27, 1000, false);
-    pros::delay(1000);
-    chassis.moveToPoint(-60, -40, 1000);
-    chassis.moveToPose(-25, -1, 0, 3500, {.forwards = true});
+    chassis.setPose(-48,-55,315);
+    intake();
+    chassis.moveToPoint(-62.5,-40, 1000);
+    intake(true);
+    chassis.moveToPoint(-63, -26, 1500);
+    chassis.moveToPoint(-63,-40, 1000, false);
+    chassis.moveToPose(-35, -1, 0, 3500, {.forwards = true});
     intakeMotor.move(127);
     chassis.turnTo(-40, -60, 750);
-    chassis.moveToPoint(-55, -45, 1000);
+    chassis.moveToPoint(-60, -45, 1000);
     pros::delay(1000);
     chassis.turnTo(0, -60, 750);
     intakeMotor.move(-127);
-    chassis.moveToPoint(-7, -60, 1000, true, 100);
+    chassis.moveToPoint(-20, -58, 1000, true, 100);
 
     /*chassis.turnTo(-24, -35, 1000);
     chassis.moveToPoint(-24, -35, 1000);
@@ -323,47 +316,37 @@ int skills(){
 //     return 0;
 // }
 
+ASSET(offensiveStart_txt);
 int sixBallAuton(){
-    //pick up ball from under elvation
-    chassis.setPose(24,-58,270);
-    intake();
-    chassis.moveToPoint(5, -60, 1000);
-    
-
-    //boomarang to beside net
-    chassis.moveToPose(62,-35, 0, 3000, {.forwards = true});
-    chassis.waitUntil(50);
-    //get from matchload
-    //wing(true);
-    chassis.waitUntil(60);
-    //wing(false);
-    //outtake and push into net
-    intake(true);
-    chassis.moveToPoint(60,-30, 700);
-    chassis.moveToPoint(58, -45, 1000, false);
-    intake();
-    chassis.moveToPoint(4,-24, 700);
-    //line up and go for the triball not in middle
-    chassis.turnTo(12, -24, 750);
-    chassis.moveToPoint(12,-24, 200, false);
+    chassis.setPose(36, -61, 0);
+    chassis.follow(offensiveStart_txt, 10, 5000);
+    chassis.turnTo(48, 0, 1000);
     chassis.waitUntilDone();
-    chassis.turnTo(60,0,750);
-    //out take infront of the net
+    wing(true);
+    chassis.moveToPoint(40, 0, 1000, true, 127, false);
+    chassis.waitUntilDone();
+    wing(false);
     intake(true);
     pros::delay(500);
-    //get the top middle triball and push all into the net
+    intakeMotor.move(0);
+    chassis.moveToPoint(18, -23, 1000);
+    chassis.turnTo(0, -23, 1000);
     intake();
-    chassis.moveToPoint(9,-7,750);
-    chassis.moveToPoint(40,0, 2000);
+    chassis.moveToPoint(13, -23, 1000);
+    pros::delay(500);
+    intakeMotor.move(0);
+    chassis.moveToPoint(40, -5, 1000);
     intake(true);
-    chassis.waitUntil(10);
-    //wing(true);
+    chassis.moveToPoint(30, -5, 500, false);
+    chassis.moveToPoint(12, -35, 500);
 
-
-
+    // chassis.moveToPoint(10, -23, 1000);
+    // chassis.moveToPoint(40, -10, 1000);
+    // chassis.waitUntil(10);
+    // wing(true);
+    // intake(true);
+    // chassis.waitUntilDone();
+    // wing(false);
+    // chassis.moveToPoint(12, -36, 1000);
     return 0;
-
-
-
-
 }

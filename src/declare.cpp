@@ -13,7 +13,7 @@ pros::MotorGroup rightMotor({rf,rm, rb});
 pros::MotorGroup leftMotor({lf,lm, lb});
 
 // pros::Rotation backRot(7);
-pros::IMU imu(19);
+pros::IMU imu(20);
 pros::Motor intakeMotor(1, pros::E_MOTOR_GEARSET_06, true);
 pros::ADIDigitalOut intakeHold('C');
 pros::ADIDigitalOut wing1('A');
