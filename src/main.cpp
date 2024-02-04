@@ -65,10 +65,10 @@ void competition_initialize() {}
 void autonomous() {
     intakeHold.set_value(1);
     if(selector::auton == 1){
-        defAuton();
+        mayhem_off();
     }
     if(selector::auton == 2){
-        sixBallAuton();
+        mayhem_off();
     }
     if(selector::auton == 0){
         skills();
@@ -77,7 +77,7 @@ void autonomous() {
         defAuton();
     }
     if(selector::auton == -2){
-        sixBallAuton();
+        mayhem_off();
     }
 
 
