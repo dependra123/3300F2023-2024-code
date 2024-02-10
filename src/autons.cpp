@@ -191,26 +191,6 @@ int defAuton(){
     chassis.turnTo(0, -60, 750);
     intakeMotor.move(-127);
     chassis.moveToPoint(-25, -58, 1000, true, 100);
-    // back up and move toward middle triball
-    chassis.moveToPoint(-63,-40, 1000);
-    chassis.moveToPose(-35, -1, 0, 2500, {.forwards = true});
-    // intake and move down near starting pos
-    intakeMotor.move(127);
-    chassis.moveToPose(-63,-40, 270, 2000);
-    pros::delay(1000);
-    // outake push triballs onto other side
-    chassis.turnTo(0, -60, 750);
-    intakeMotor.move(-127);
-    chassis.moveToPoint(-25, -58, 1000, true, 100);
-}
-int defAuton(){
-    chassis.setPose(-48,-55,135);
-    // start intake and move toward nets
-    chassis.turnTo(0, -60, 700);
-    hang(true)
-    chassis.moveTo(-8,-60);
-    hang(false);
-    
 
     /*chassis.turnTo(-24, -35, 1000);
     chassis.moveToPoint(-24, -35, 1000);
