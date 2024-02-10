@@ -168,7 +168,8 @@ void wing(bool open){
 
 //     return 0;
 // }
-int testdefAuton(){
+
+int defAuton(){
     chassis.setPose(-48,-55,315);
     // start intake and move toward net
     intake();
@@ -178,6 +179,18 @@ int testdefAuton(){
     intake(true);
     chassis.moveToPoint(-63, -26, 1500);
     hang.set_value(false);
+    // back up and move toward middle triball
+    chassis.moveToPoint(-63,-40, 1000, false);
+    chassis.moveToPose(-35, -1, 0, 2500, {.forwards = true});
+    // intake and move down near starting pos
+    intakeMotor.move(127);
+    chassis.turnTo(-40, -60, 750);
+    chassis.moveToPoint(-60, -45, 1000);
+    pros::delay(1000);
+    // outake push triballs onto other side
+    chassis.turnTo(0, -60, 750);
+    intakeMotor.move(-127);
+    chassis.moveToPoint(-25, -58, 1000, true, 100);
     // back up and move toward middle triball
     chassis.moveToPoint(-63,-40, 1000);
     chassis.moveToPose(-35, -1, 0, 2500, {.forwards = true});
@@ -365,33 +378,6 @@ int sixBallAuton(){
     return 0;
 }
 
-int mecha_off(){
-    pros::delay(10);
-    //wing(true);
-    chassis.setPose(40, -61, 0);
-    //pros::delay(500);
-    intake();
-    chassis.moveToPoint(25, 1, 1500);
-    //wing(false);
-    pros::delay(500);
-    chassis.turnTo(50, 5, 1000);
-    chassis.moveToPoint(80, 1, 1000);
-    chassis.moveToPoint(30, 10, 1000, false);
-    
-    // pros::delay(1000);
-    // //chassis.turnTo(0,5,750);
-    // chassis.moveToPoint(27, 10, 1000);
-    // intake();
-    // chassis.turnTo(50, 5, 750);
-    // chassis.moveToPoint(80, 1, 1000);
-    // pros::delay(500);
-    // intake(true);
-    // chassis.moveToPoint(45, 10, 1000, false);
-
-
-    return 0;
-}
-
 int quick_off(){
 
     chassis.setPose(48,-55,45);
@@ -401,55 +387,3 @@ int quick_off(){
     chassis.moveToPoint(63, -26, 1500);
     return 0;
 }
-
-int mayhem_off(){
-    pros::delay(10);
-    chassis.setPose(47, -54, 45);
-    // start intake and move toward net
-    intake();
-    chassis.moveToPoint(62.5,-40, 1000);
-    // outake and score
-    intake(true);
-    chassis.moveToPoint(63, -26, 1250);
-    chassis.moveToPoint(63, -15, 1000);
-    //back up and line up with middle triball
-    chassis.moveToPoint(63, -40, 1000, false);
-    chassis.moveToPoint(30, -32, 1000);
-    pros::delay(750);
-    // turn and grab middle triball
-    chassis.turnTo(30, 0, 900);
-    intake();
-    chassis.moveToPoint(30, 0, 1000);
-    // turn and score
-    chassis.turnTo(60, 0, 750);
-    chassis.moveToPoint(60, 0, 1000);
-    // back up and grab second middle triball
-    chassis.moveToPoint(20, 0, 1000, false);
-    chassis.turnTo(13, 0, 1000);
-    chassis.moveToPoint(13, 0, 1000);
-
-    //hang.set_value(false);
-    // pros::delay(10);
-    // chassis.setPose(40, -61, 0);
-    // intake();
-    // chassis.moveToPoint(25, -16, 1000);
-    // chassis.turnTo(80, -14, 1000);
-    // intake(true);
-    // chassis.moveToPoint(80, -16, 1000);
-    // chassis.moveToPoint(25, -20, 1000, false);
-    // chassis.moveToPoint(20, 0, 1000);
-    // chassis.turnTo(50, 2, 750);
-    // chassis.moveToPoint(80, 0, 1000);
-    // chassis.moveToPoint(37, 0, 1000, false);
-    // chassis.moveToPoint(10, 0, 1000);
-    // chassis.moveToPoint(80, 0, 1000);
-    // chassis.moveToPoint(37, 0, 1000);
-    // chassis.moveToPoint(12, -22, 1000);
-    // chassis.moveToPoint(80, -8, 1000);
-    // chassis.moveToPoint(30, -8, 1000, false);
-
-
-
-    return 0;
-}
-
