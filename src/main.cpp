@@ -26,11 +26,12 @@
  */
 void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
+     selector::init();
     chassis.calibrate(); // calibrate the chassis
     //chassis.setPose({35, -63, 0}); // offensive starting position
     //chassis.setPose({35, -63, 0}); // defensive starting position
     intakeHold.set_value(0);
-    selector::init();
+   
   }
 
 /**
@@ -121,7 +122,7 @@ void opcontrol() {
     while(true){
         // wing1.set_value(wingOpen);
 
-        arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 5);
+        chassis.arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 5);
         if(master.get_digital(DIGITAL_L1)){
             intakeMotor.move(127);
         }
