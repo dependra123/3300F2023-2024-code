@@ -168,7 +168,19 @@ void wing(bool open){
 
 //     return 0;
 // }
-
+double degToRad(double deg){
+    return deg * (M_PI / 180);
+}
+void reltiveMove(int dist, int timeOut = 1000, bool dir = true){
+    double x =dist* sin(degToRad(chassis.getPose().theta));
+    double y = dist * cos(degToRad(chassis.getPose().theta));
+    chassis.moveToPoint(chassis.getPose().x + x, chassis.getPose().y + y, 1000, dir);
+}
+void realtiveTurn(int angle, int timeOut = 1000){
+    double x = cos(degToRad(chassis.getPose().theta + angle)) *100;
+    double y = sin(degToRad(chassis.getPose().theta + angle)) *100;
+    chassis.moveToPoint(chassis.getPose().x + x, chassis.getPose().y + y, timeOut);
+}
 int defAuton(){
     chassis.setPose(-48,-55,315);
     // start intake and move toward net
