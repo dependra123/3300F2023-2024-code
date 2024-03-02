@@ -22,7 +22,12 @@ extern pros::ADIDigitalOut hang;
 
 extern pros::Rotation backRot;
 extern pros::IMU imu;
-extern pros::Motor intakeMotor;
+extern pros::Motor intakeMotor1;
+extern pros::Motor intakeMotor2;
+extern pros::ADIDigitalOut intakeLift;
+extern pros::MotorGroup intakeMotor;
+
+
 
 extern lemlib::TrackingWheel horizontal;
 

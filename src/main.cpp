@@ -26,12 +26,11 @@
  */
 void initialize() {
 	pros::lcd::initialize(); // initialize brain screen
-     selector::init();
+    //  selector::init();
     chassis.calibrate(); // calibrate the chassis
     //chassis.setPose({35, -63, 0}); // offensive starting position
     //chassis.setPose({35, -63, 0}); // defensive starting position
-    intakeHold.set_value(0);
-   
+    
   }
 
 /**
@@ -64,22 +63,23 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-    intakeHold.set_value(1);
-    if(selector::auton == 1){
-        defAuton();
-    }
-    if(selector::auton == 2){
-        sixBallAuton();
-    }
-    if(selector::auton == 0){
-        skills();
-    }
-    if(selector::auton == -1){
-        defAuton();
-    }
-    if(selector::auton == -2){
-        sixBallAuton();
-    }
+    intakeLift.set_value(1);
+    // if(selector::auton == 1){
+    //     defAuton();
+    // }
+    // if(selector::auton == 2){
+    //     sixBallAuton();
+    // }
+    // if(selector::auton == 0){
+    //     skills();
+    // }
+    // if(selector::auton == -1){
+    //     defAuton();
+    // }
+    // if(selector::auton == -2){
+    //     sixBallAuton();
+    // }
+    // skills();
 
 
 	
@@ -118,29 +118,29 @@ void opcontrol() {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     bool wingOpen = false;
     bool hangToggle =false;
-	intakeHold.set_value(1);
+    bool intakeUp = false;
     while(true){
         // wing1.set_value(wingOpen);
 
         chassis.arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 5);
         if(master.get_digital(DIGITAL_L1)){
-            intakeMotor.move(127);
+            intakeMotor.move_velocity(600);
+
         }
         else if(master.get_digital(DIGITAL_R1)){
-            intakeMotor.move(-127);
+            intakeMotor.move_velocity(-600);
         }
         else{
             intakeMotor.move(0);
         }
-        if (master.get_digital(DIGITAL_L2)){
-            fly_wheel.move(-120);
+        if (master.get_digital_new_press(DIGITAL_UP)){
+            intakeUp=!intakeUp;
         }
         // else if(master.get_digital(DIGITAL_R2))
         //     fly_wheel.move(-120);
         // else if(master.get_digital(DIGITAL_RIGHT))
         //     fly_wheel.move(100);
-        else
-            fly_wheel.move(0);
+         
 
         if (master.get_digital_new_press(DIGITAL_Y))
             wingOpen = !wingOpen;
@@ -148,8 +148,7 @@ void opcontrol() {
         if(master.get_digital_new_press(DIGITAL_X)){
             hangToggle = !hangToggle;
         }
-        hang.set_value(hangToggle);
-
+        intakeLift.set_value(intakeUp);
         wing1.set_value(wingOpen);
         wing2.set_value(wingOpen);
         

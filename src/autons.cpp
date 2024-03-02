@@ -181,63 +181,82 @@ void realtiveTurn(int angle, int timeOut = 1000){
     double y = sin(degToRad(chassis.getPose().theta + angle)) *100;
     chassis.moveToPoint(chassis.getPose().x + x, chassis.getPose().y + y, timeOut);
 }
-int defAuton(){
-    chassis.setPose(-48,-55,315);
-    // start intake and move toward net
-    intake();
-    chassis.moveToPoint(-62.5,-40, 1000);
-    hang.set_value(1);
-    // outake and score
-    intake(true);
-    chassis.moveToPoint(-63, -26, 1500);
-    hang.set_value(false);
-    // back up and move toward middle triball
-    chassis.moveToPoint(-63,-40, 1000, false);
-    chassis.moveToPose(-35, -1, 0, 2500, {.forwards = true});
-    // intake and move down near starting pos
-    intakeMotor.move(127);
-    chassis.turnTo(-40, -60, 750);
-    chassis.moveToPoint(-60, -45, 1000);
-    pros::delay(1000);
-    // outake push triballs onto other side
-    chassis.turnTo(0, -60, 750);
-    intakeMotor.move(-127);
-    chassis.moveToPoint(-25, -58, 1000, true, 100);
-
-    /*chassis.turnTo(-24, -35, 1000);
-    chassis.moveToPoint(-24, -35, 1000);
-    chassis.turnTo(-24, -1, 1000);
-    intakeMotor.move(127);
-    chassis.moveToPoint(-24, -7, 1000);
-    pros::delay(500);
-    intakeMotor.move(0);
-    chassis.turnTo(-10, -20, 1000);
-    chassis.moveToPoint(-10, -20, 1000);
-    chassis.turnTo(15, -20, 1000);
-    intakeMotor.move(-127);
-    pros::delay(2000);
-    intakeMotor.move(0);*/
-
-
-    
-//     /*
-//     chassis.moveToPoint(-60, 0, 2000);
-//     chassis.turnTo(-10, -30, 2000);
-//     chassis.moveToPoint(-10, -30, 2000);
-//     chassis.turnTo(25, -30, 2000);
-//     intakeMotor.move(-127);
-//     pros::delay(2000);
-//     intakeMotor.move(0);
-//     chassis.turnTo(-10, 0, 2000);
+// int defAuton(){
+//     chassis.setPose(-48,-55,315);
+//     // start intake and move toward net
+//     intake();
+//     chassis.moveToPoint(-62.5,-40, 1000);
+//     hang.set_value(1);
+//     // outake and score
+//     intake(true);
+//     chassis.moveToPoint(-63, -26, 1500);
+//     hang.set_value(false);
+//     // back up and move toward middle triball
+//     chassis.moveToPoint(-63,-40, 1000, false);
+//     chassis.moveToPose(-35, -1, 0, 2500, {.forwards = true});
+//     // intake and move down near starting pos
 //     intakeMotor.move(127);
-//     chassis.moveToPoint(-10, 0, 2000);
-//     chassis.turnTo(30, 0, 2000);
+//     chassis.turnTo(-40, -60, 750);
+//     chassis.moveToPoint(-60, -45, 1000);
+//     pros::delay(1000);
+//     // outake push triballs onto other side
+//     chassis.turnTo(0, -60, 750);
+//     intakeMotor.move(-127);
+//     chassis.moveToPoint(-25, -58, 1000, true, 100);
+
+//     /*chassis.turnTo(-24, -35, 1000);
+//     chassis.moveToPoint(-24, -35, 1000);
+//     chassis.turnTo(-24, -1, 1000);
+//     intakeMotor.move(127);
+//     chassis.moveToPoint(-24, -7, 1000);
+//     pros::delay(500);
+//     intakeMotor.move(0);
+//     chassis.turnTo(-10, -20, 1000);
+//     chassis.moveToPoint(-10, -20, 1000);
+//     chassis.turnTo(15, -20, 1000);
 //     intakeMotor.move(-127);
 //     pros::delay(2000);
-//     intakeMotor.move(0);
-//     */
+//     intakeMotor.move(0);*/
+
 
     
+// //     /*
+// //     chassis.moveToPoint(-60, 0, 2000);
+// //     chassis.turnTo(-10, -30, 2000);
+// //     chassis.moveToPoint(-10, -30, 2000);
+// //     chassis.turnTo(25, -30, 2000);
+// //     intakeMotor.move(-127);
+// //     pros::delay(2000);
+// //     intakeMotor.move(0);
+// //     chassis.turnTo(-10, 0, 2000);
+// //     intakeMotor.move(127);
+// //     chassis.moveToPoint(-10, 0, 2000);
+// //     chassis.turnTo(30, 0, 2000);
+// //     intakeMotor.move(-127);
+// //     pros::delay(2000);
+// //     intakeMotor.move(0);
+// //     */
+
+    
+//     return 0;
+// }
+
+int defAuton(){
+    // wing1.set_value(true);
+    pros::delay(300);
+    chassis.setPose(-36, -54, 0);
+    chassis.moveToPoint(-25, -7.5, 1500);
+    chassis.waitUntil(20);
+    wing(false);
+    intake();
+    chassis.moveToPoint(-36, -60, 1500, false);
+    chassis.turnTo(0, -60, 1000);
+    chassis.waitUntilDone();
+    intake(true);
+    chassis.moveToPose(-60,-36, 180, 1500, {.forwards = false});
+    chassis.moveToPose(5, -60, 90, 1500);
+
+
     return 0;
 }
 // int testOffAuton(){
@@ -262,9 +281,9 @@ int defAuton(){
 int skills(){
     chassis.setPose(-48,-55,315);
     intake();
-    chassis.moveToPoint(-62.5,-40, 1000);
+    chassis.moveToPoint(-60,-40, 1000);
     intake(true);
-    chassis.moveToPoint(-63, -26, 1500);
+    chassis.moveToPoint(-60, -26, 1500);
     chassis.moveToPose(-67, -45, 70, 1300, {.forwards=false});
     intakeMotor.move(0);
     fly_wheel.move(-127);
@@ -281,7 +300,7 @@ int skills(){
     chassis.moveToPose(57,-20,0,3500);
     chassis.waitUntilDone();
     chassis.setPose(57,-22,0);
-    //add wings here
+    
 
     chassis.moveToPoint(57, -35,1000, false);
     chassis.moveToPoint(10,-35,1000);

@@ -14,11 +14,14 @@ pros::MotorGroup leftMotor({lf,lm, lb});
 
 // pros::Rotation backRot(7);
 pros::IMU imu(20);
-pros::Motor intakeMotor(1, pros::E_MOTOR_GEARSET_06, true);
-pros::ADIDigitalOut intakeHold('C');
+pros::Motor intakeMotor1(10, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor intakeMotor2(12, pros::E_MOTOR_GEARSET_06, true);
+pros::MotorGroup intakeMotor({intakeMotor1, intakeMotor2});
+pros::ADIDigitalOut intakeLift('C');
+
 pros::ADIDigitalOut wing1('A');
-pros::ADIDigitalOut wing2('B');
-pros::ADIDigitalOut hang('D');
+pros::ADIDigitalOut wing2('D');
+pros::ADIDigitalOut hang('f');
 
 //lemlib::TrackingWheel horizontal(&backRot, 3.25, 2.5);
 
