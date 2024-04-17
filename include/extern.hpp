@@ -18,6 +18,7 @@ extern pros::MotorGroup leftMotor;
 extern pros::ADIDigitalOut wing1;
 extern pros::ADIDigitalOut wing2;
 extern pros::ADIDigitalOut hang;
+extern pros::ADIDigitalOut winPt;
 
 
 extern pros::Rotation backRot;

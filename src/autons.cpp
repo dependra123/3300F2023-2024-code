@@ -1,12 +1,12 @@
 #include "main.h"
 
-void intake(bool reverse=false){
+void intake(bool reverse=true){
     intakeMotor.move(reverse ? -127: 127);
 }
 
 void wing(bool open){
     wing1.set_value(open);
-  wing2.set_value(open);
+    wing2.set_value(open);
 }
 
 // }
@@ -24,7 +24,7 @@ void wing(bool open){
 //     float nextKp = 1;
 //     float nextKd = 1;
 //     lemlib::Pose lastPose = chassis.getPose();
-//     double lastTime = pros::millis();
+//     double lastTime = pros::millis();{.forwards = false}
 //     while(tuning){
 //         //move forward
 //         if(driveSetteled){
@@ -242,22 +242,45 @@ void realtiveTurn(int angle, int timeOut = 1000){
 // }
 
 int defAuton(){
+    // winPt.set_value(false);
     // wing1.set_value(true);
-    pros::delay(300);
-    chassis.setPose(-36, -54, 0);
-    chassis.moveToPoint(-25, -7.5, 1500);
-    chassis.waitUntil(20);
-    wing(false);
-    intake();
-    chassis.moveToPoint(-36, -60, 1500, false);
-    chassis.turnTo(0, -60, 1000);
-    chassis.waitUntilDone();
-    intake(true);
-    chassis.moveToPose(-60,-36, 180, 1500, {.forwards = false});
-    chassis.moveToPose(5, -60, 90, 1500);
+    // intakeLift.set_value(true);
+    // wing1.set_value(true);
+    // pros::delay(200);
+    // chassis.setPose(-36, -54, 0);                                         
+    // chassis.moveToPoint(-25, -7.5, 1500);
+    // chassis.waitUntil(20);
+    // wing(false);
+    // intake();
+    // chassis.moveToPoint(-36, -60, 1500, false);
+    // chassis.turnTo(0, -60, 1000);
+    // chassis.waitUntilDone();
+    // intake(true);
+    // chassis.turnTo(-100, -60, 1000);
+    // chassis.moveToPose(-60,-36, 180, 1500, {.forwards = true});
+    // chassis.waitUntil(20);
+    // winPt.set_value(true);
+    // chassis.waitUntil(30);
+    // winPt.set_value(false);
+    // chassis.moveToPose(0, -60, 90, 1500);
 
+
+    intake();
+    chassis.setPose(-48,-55,315);
+
+    chassis.moveToPoint(-58, -48,1500);
+    winPt.set_value(false);
+    chassis.waitUntilDone();
+    winPt.set_value(true);
+    chassis.moveToPoint(-63,28,1500);
+
+    chassis.moveToPoint(-48,-60, 1500, false);
+    chassis.moveToPoint(-23, -60, 1500,true);
 
     return 0;
+
+
+    // return 0;
 }
 // int testOffAuton(){
 //     intake();
@@ -354,29 +377,63 @@ int skills(){
 //     return 0;
 // }
 
-ASSET(offensiveStart_txt);
 int sixBallAuton(){
-    chassis.setPose(36, -61, 0);
-    chassis.follow(offensiveStart_txt, 10, 5000);
-    chassis.turnTo(48, 0, 1000);
-    chassis.waitUntilDone();
+    //THIRD HASH ON THE MAT FROM THE LEFT
+    intakeLift.set_value(true);
+
+    chassis.setPose(36, -54, 0);                                         
+    chassis.moveToPoint(24, -6, 1600);
+
+    intake(true);
+    chassis.moveToPoint(24, 0,1000);
+    chassis.turnTo(44, 0, 1500);
+    chassis.moveToPoint(48, 0, 1500);
+    chassis.waitUntil(10);
+    chassis.moveToPoint(20, 0, 1000, true);
+    chassis.moveToPoint(3, 0, 2000);
+    intake(true);
+    chassis.moveToPoint(48, 0, 1500);
+    chassis.waitUntil(10);
     wing(true);
-    chassis.moveToPoint(40, 0, 1000, true, 127, false);
-    chassis.waitUntilDone();
+    intakeMotor.move(127); 
+    chassis.moveToPoint(40, 0, 1000);
+    intakeMotor.move(0);
     wing(false);
+    chassis.moveToPoint(3, -30, 1000);
+    chassis.moveToPoint(5, -23, 1500);
     intake(true);
-    pros::delay(500);
-    intakeMotor.move(0);
-    chassis.moveToPoint(18, -23, 1000);
-    chassis.turnTo(0, -23, 1000);
-    intake();
-    chassis.moveToPoint(13, -23, 1000);
-    pros::delay(500);
-    intakeMotor.move(0);
-    chassis.moveToPoint(40, -5, 1000);
+    chassis.moveToPoint(48, 0, 2000);
+    chassis.moveToPoint(20, 0, 1000, false); 
+    chassis.moveToPoint(30,-60,3000);
+    chassis.moveToPoint(0,-60,1500);
     intake(true);
-    chassis.moveToPoint(30, -5, 500, false);
-    chassis.moveToPoint(12, -35, 500);
+
+
+
+
+
+
+    // chassis.setPose(36, -61, 0);
+    // chassis.follow(offensiveStart_txt, 10, 5000);
+    // chassis.turnTo(48, 0, 1000);
+    // chassis.waitUntilDone();
+    // wing(true);
+    // chassis.moveToPoint(40, 0, 1000, true);
+    // chassis.waitUntilDone();
+    // wing(false);
+    // intake(true);
+    // pros::delay(500);
+    // intakeMotor.move(0);
+    // chassis.moveToPoint(18, -23, 1000);
+    // chassis.turnTo(0, -23, 1000);
+    // intake();
+    // chassis.moveToPoint(13, -23, 1000);
+    // pros::delay(500);
+    // intakeMotor.move(0);
+    // chassis.moveToPoint(40, -5, 1000);
+    // intake(true);
+    // chassis.moveToPoint(30, -5, 500, false);
+    // chassis.moveToPoint(12, -35, 500);
 
     // chassis.moveToPoint(10, -23, 1000);
     // chassis.moveToPoint(40, -10, 1000);
@@ -388,6 +445,8 @@ int sixBallAuton(){
     // chassis.moveToPoint(12, -36, 1000);
     return 0;
 }
+
+// 
 
 int quick_off(){
 

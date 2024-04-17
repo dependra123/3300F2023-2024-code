@@ -30,6 +30,7 @@ void initialize() {
     chassis.calibrate(); // calibrate the chassis
     //chassis.setPose({35, -63, 0}); // offensive starting position
     //chassis.setPose({35, -63, 0}); // defensive starting position
+    intakeLift.set_value(false);
     
   }
 
@@ -59,11 +60,11 @@ void competition_initialize() {}
  * for non-competition testing purposes.
  *
  * If the robot is disabled or communications is lost, the autonomous task
- * will be stopped. Re-enabling the robot will restart the task, not re-start it
+ * will be tstopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
 void autonomous() {
-    intakeLift.set_value(1);
+    sixBallAuton();
     // if(selector::auton == 1){
     //     defAuton();
     // }
@@ -115,6 +116,7 @@ void arcade(int throttle, int turn, float curveGain) {
     drivetrain.rightMotors->move(rightPower);
 }
 void opcontrol() {
+    winPt.set_value(true);
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     bool wingOpen = false;
     bool hangToggle =false;
@@ -124,16 +126,16 @@ void opcontrol() {
 
         chassis.arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X), 5);
         if(master.get_digital(DIGITAL_L1)){
-            intakeMotor.move_velocity(600);
+            intakeMotor.move(127);
 
         }
         else if(master.get_digital(DIGITAL_R1)){
-            intakeMotor.move_velocity(-600);
+            intakeMotor.move(-127);
         }
         else{
             intakeMotor.move(0);
         }
-        if (master.get_digital_new_press(DIGITAL_UP)){
+        if (master.get_digital_new_press(DIGITAL_R2)){
             intakeUp=!intakeUp;
         }
         // else if(master.get_digital(DIGITAL_R2))
